@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "env",
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-object-assign",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "utils": "utils"
+      }
+    }]
+  ]
+}
