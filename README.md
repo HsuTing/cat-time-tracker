@@ -57,6 +57,7 @@ yarn time-tracker show [argv]
 
 ## TODO
 - [ ] output html
+- [ ] add git branch and commit
 
 ## License
 MIT © [HsuTing](http://hsuting.com)
