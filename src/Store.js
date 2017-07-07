@@ -26,7 +26,7 @@ class Store {
     }
   }
 
-  addTime(id, tag, note, newTime, callback = () => {}) {
+  addTime(id, tag, note, newTime) {
     const store = memFs.create();
     const fs = editor.create(store);
 
@@ -42,12 +42,20 @@ class Store {
       JSON.stringify(this.store, null, 2)
     );
 
-    fs.commit(err => {
-      if(err)
-        throw new Error(err);
+    return new Promise((resolve, reject) => {
+      fs.commit(err => {
+        if(err)
+          reject(err);
 
-      callback();
+        resolve(true);
+      });
     });
+  }
+
+  modifyTime(id, note) {
+    const {tag, endTime} = this.store.time[id];
+
+    return this.addTime(id, tag, note, endTime);
   }
 
   get time() {

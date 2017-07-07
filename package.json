@@ -54,6 +54,7 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "pre-commit": "^1.2.2",
+    "shelljs": "^0.7.8",
     "should": "^11.2.1"
   },
   "dependencies": {

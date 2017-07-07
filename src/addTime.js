@@ -37,17 +37,20 @@ export default async originOptions => {
     ...answers
   };
 
+  if(!Object.keys(tags).includes(tag))
+    throw new Error(`${tag}: tag not found`);
+
   console.log();
   const now = moment();
   const id = uuid.v4();
 
-  Store.addTime(id, tag, note, moment());
+  await Store.addTime(id, tag, note, moment());
 
-  process.on('SIGINT', function() {
-    Store.addTime(id, tag, note, moment(), () => {
+  process.on('SIGINT', async () => {
+    if(await Store.addTime(id, tag, note, moment())) {
       console.log();
       process.exit();
-    });
+    }
   });
 
   return setInterval(() => {

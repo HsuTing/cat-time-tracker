@@ -1,19 +1,55 @@
 # Cat-time-tracker [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
-Time tracker
+This is the time tracker for the terminal.
 
-## Getting Started
-Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-installed [npm](https://www.npmjs.com/) and [node.js](https://nodejs.org/)).
+## How to use
+You must set a git username in your `.gitignore`. It will make a json file as `.time-tracker/[username].json` to store data and make a default setting. The setting which you can use:
+- `timerColor(default: gray)`
+- `format(default: "MMMM Do YYYY, h:mm:ss")`
+- `tags(default: {"normal": "bgGreen", "bug": "bgRed"})`: Give a name as key and a color name as value.
 
-```sh
-yarn install && yarn build
+Use `argv` as `--[argv name]=[argv value]`.
+
+
+
+#### Start
+Start a time tracker.
+
+```js
+yarn time-tracker [argv]
 ```
 
-## Usage
-- `build`: Build the project. Use this script before you start to write the project.
-- `production`: Set `NODE_ENV=production` and build the project. Use this script when you need to make a production version.
-- `watch`: Watch all files. Use this script when you are developing.
-- `test`: Run the test.
-- You can see other scripts in [package.json](./package.json).
+###### argv
+- `note`: Add a not to your time tracker.
+- `tag`: Choose a `tag` to your time tracker.
+
+
+
+#### Modify
+Modify a record time.
+
+```js
+yarn time-tracker modify [argv]
+```
+
+###### argv
+- `id`: This is the id of the record time.
+- `note`: Add a new note to the record time.
+
+
+#### Show
+Show those record time.
+
+```js
+yarn time-tracker show [argv]
+```
+
+###### argv
+- `limit`: This is the limit of those record time which be shown.
+
+
+
+## TODO
+- [ ] output html
 
 ## License
 MIT © [HsuTing](http://hsuting.com)

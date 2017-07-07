@@ -38,7 +38,8 @@ export default async originOptions => {
     ...answers
   };
 
-  const {tag, endTime} = Store.store.time[id];
+  if(!Store.store.time[id])
+    throw new Error(`${id}: id not found`);
 
-  Store.addTime(id, tag, note, endTime);
+  return await Store.modifyTime(id, note);
 };

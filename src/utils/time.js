@@ -1,5 +1,6 @@
 'use strict';
 
+import process from 'process';
 import moment from 'moment';
 import chalk from 'chalk';
 
@@ -19,5 +20,5 @@ export const printTime = (tag, note, time) => {
   const outputTag = `${chalk.whiteBright.bold[ tags[tag] || defaultStore.tags.normal ](` ${tag} `)}`;
   const outputTime = `${chalk[ timerColor || defaultStore.timerColor ](`(${time})`)}`;
 
-  return `${outputTag} ${outputTime} ${note}`;
+  return process.env.TEST ? '' : `${outputTag} ${outputTime} ${note}`;
 };
