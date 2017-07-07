@@ -12,6 +12,9 @@ import defaultStore from './../data/defaultStore.json';
 const {format} = Store.store;
 
 export default async originOptions => {
+  if(Store.time.length === 0)
+    return;
+
   const options = getOptions(['id', 'note'], originOptions);
   const answers = await inquirer.prompt([{
     type: 'list',
