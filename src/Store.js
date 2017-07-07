@@ -26,18 +26,16 @@ class Store {
     }
   }
 
-  addTime(name, newTime, tag) {
-    const {time} = this.store;
+  addTime(id, tag, note, newTime, callback = () => {}) {
     const store = memFs.create();
     const fs = editor.create(store);
 
-    this.store.time = [{
-      name,
-      time: newTime,
-      tag
-    }].concat(time).sort((a, b) => {
-      return moment(b.time).format('x') - moment(a.time).format('x');
-    });
+    this.store.time[id] = {
+      note,
+      tag,
+      startTime: this.store.time[id] ? this.store.time[id].startTime : newTime,
+      endTime: newTime
+    }
 
     fs.write(
       filePath,
@@ -47,11 +45,20 @@ class Store {
     fs.commit(err => {
       if(err)
         throw new Error(err);
+
+      callback();
     });
   }
 
   get time() {
-    return this.store.time;
+    return Object.keys(this.store.time)
+      .map(id => ({
+        id,
+        ...this.store.time[id]
+      }))
+      .sort((a, b) => (
+        moment(b.endTime).format('x') - moment(a.endTime).format('x')
+      ));
   }
 }
 

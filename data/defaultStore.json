@@ -1,8 +1,9 @@
 {
-  "format": "YYYY-MM-DD HH:mm:ss",
+  "timerColor": "gray",
+  "format": "MMMM Do YYYY, h:mm:ss",
   "tags": {
     "normal": "bgGreen",
-    "error": "bgRed"
+    "bug": "bgRed"
   },
-  "time": []
+  "time": {}
 }
