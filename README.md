@@ -22,6 +22,8 @@ yarn time-tracker [argv]
 - `note`: Add a not to your time tracker.
 - `tag`: Choose a `tag` to your time tracker.
 
+![start image](https://hsuting.github.io/cat-time-tracker/start.png)
+
 
 
 #### Modify
@@ -35,6 +37,9 @@ yarn time-tracker modify [argv]
 - `id`: This is the id of the record time.
 - `note`: Add a new note to the record time.
 
+![modify image](https://hsuting.github.io/cat-time-tracker/modify.png)
+
+
 
 #### Show
 Show those record time.
@@ -45,6 +50,8 @@ yarn time-tracker show [argv]
 
 ###### argv
 - `limit`: This is the limit of those record time which be shown.
+
+![show image](https://hsuting.github.io/cat-time-tracker/show.png)
 
 
 
