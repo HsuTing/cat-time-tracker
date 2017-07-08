@@ -11,7 +11,7 @@
     "watch": "concurrently -c green \"yarn lint:watch\" \"yarn babel:watch\""
   },
   "name": "cat-time-tracker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Time tracker",
   "author": {
     "name": "HsuTing",

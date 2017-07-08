@@ -22,12 +22,24 @@ class Store {
 
     try {
       this.store = {
-        ...require(settingPath),
+        ...this.store,
+        ...require(settingPath)
+      };
+    } catch(e) {
+      this.store = {
+        ...this.store,
+        ...require('./../data/defaultSetting.json')
+      };
+    }
+
+    try {
+      this.store = {
+        ...this.store,
         ...require(filePath)
       };
     } catch(e) {
       this.store = {
-        ...require('./../data/defaultSetting.json'),
+        ...this.store,
         ...require('./../data/defaultStore.json')
       };
     }
