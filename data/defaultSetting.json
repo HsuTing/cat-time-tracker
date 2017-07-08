@@ -1,6 +1,6 @@
 {
   "timerColor": "gray",
-  "format": "MMMM Do YYYY, h:mm:ss",
+  "format": "MMMM Do YYYY, hh:mm:ss",
   "tags": {
     "normal": "bgGreen",
     "bug": "bgRed"

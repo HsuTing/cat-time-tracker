@@ -55,6 +55,17 @@ yarn time-tracker show [argv]
 
 
 
+#### Count
+Count those record time with `tags`.
+
+```js
+yarn time-tracker count
+```
+
+![count image](https://hsuting.github.io/cat-time-tracker/count.png)
+
+
+
 ## TODO
 - [ ] output html
 - [ ] add git branch and commit
