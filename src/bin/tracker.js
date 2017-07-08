@@ -9,6 +9,7 @@ import Store from './../Store';
 import addTime from './../addTime';
 import showTime from './../showTime';
 import modifyTime from './../modifyTime';
+import countTime from './../countTime';
 
 (() => {
   // start
@@ -27,6 +28,7 @@ This is ${chalk.bgCyan(` ${Store.user.name} `)}\`s time tracker.
   switch(command) {
     case 'show': return showTime(process.argv.slice(3));
     case 'modify': return modifyTime(process.argv.slice(3));
+    case 'count': return countTime(process.argv.slice(3));
     default: return addTime(process.argv.slice(2));
   }
 })();
