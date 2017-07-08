@@ -2,7 +2,7 @@
 This is the time tracker for the terminal.
 
 ## How to use
-You must set a git username in your `.gitconfig`. It will make a json file as `.time-tracker/[username].json` to store data and make a default setting. The setting which you can use:
+You must set a git username in your `.gitconfig`. It will make two json file as `.time-tracker/[username].json` and `.time-tracker/setting.json`. Those json files are used to store data and make a default setting. The setting which you can use:
 - `timerColor(default: gray)`
 - `format(default: "MMMM Do YYYY, h:mm:ss")`
 - `tags(default: {"normal": "bgGreen", "bug": "bgRed"})`: Give a name as key and a color name as value.
