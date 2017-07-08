@@ -12,6 +12,7 @@ const config = gitConfig.sync();
 if(!config.user || !config.user.name)
   throw new Error('You muse set "user.name" in ".gitconfig". Use `git config --global user.name "username"` to set it.');
 
+const settingPath = path.resolve(process.cwd(), '.time-tracker', 'setting.json');
 const filePath = path.resolve(process.cwd(), '.time-tracker', `${config.user.name}.json`);
 
 class Store {
@@ -20,9 +21,15 @@ class Store {
     this.user = config.user;
 
     try {
-      this.store = require(filePath);
+      this.store = {
+        ...require(settingPath),
+        ...require(filePath)
+      };
     } catch(e) {
-      this.store = require('./../data/defaultStore.json');
+      this.store = {
+        ...require('./../data/defaultSetting.json'),
+        ...require('./../data/defaultStore.json')
+      };
     }
   }
 
@@ -37,9 +44,16 @@ class Store {
       endTime: newTime
     }
 
+    const {time, ...setting} = this.store;
+
+    fs.write(
+      settingPath,
+      JSON.stringify(setting, null, 2)
+    );
+
     fs.write(
       filePath,
-      JSON.stringify(this.store, null, 2)
+      JSON.stringify({time}, null, 2)
     );
 
     return new Promise((resolve, reject) => {

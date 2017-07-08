@@ -7,7 +7,7 @@ import {printTime} from 'utils/time';
 import {getOptions} from 'utils/argv';
 
 import Store from './Store';
-import defaultStore from './../data/defaultStore.json';
+import defaultSetting from './../data/defaultSetting.json';
 
 const {format} = Store.store;
 
@@ -26,7 +26,7 @@ export default async originOptions => {
     choices: Store.time.map(({id, tag, note, startTime}) => ({
       name: printTime(
         tag, note,
-        moment(startTime).format(format || defaultStore.format)
+        moment(startTime).format(format || defaultSetting.format)
       ),
       value: id
     }))

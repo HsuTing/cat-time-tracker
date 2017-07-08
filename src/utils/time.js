@@ -5,7 +5,7 @@ import moment from 'moment';
 import chalk from 'chalk';
 
 import Store from './../Store';
-import defaultStore from './../../data/defaultStore.json';
+import defaultSetting from './../../data/defaultSetting.json';
 
 const {tags, timerColor} = Store.store;
 
@@ -17,8 +17,8 @@ export const getDiffTime = (startTime, endTime) => {
 };
 
 export const printTime = (tag, note, time) => {
-  const outputTag = `${chalk.whiteBright.bold[ tags[tag] || defaultStore.tags.normal ](` ${tag} `)}`;
-  const outputTime = `${chalk[ timerColor || defaultStore.timerColor ](`(${time})`)}`;
+  const outputTag = `${chalk.whiteBright.bold[ tags[tag] || defaultSetting.tags.normal ](` ${tag} `)}`;
+  const outputTime = `${chalk[ timerColor || defaultSetting.timerColor ](`(${time})`)}`;
 
   return process.env.TEST ? '' : `${outputTag} ${outputTime} ${note}`;
 };

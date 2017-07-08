@@ -10,7 +10,7 @@ import {getDiffTime, printTime} from 'utils/time';
 import {getOptions} from 'utils/argv';
 
 import Store from './Store';
-import defaultStore from './../data/defaultStore.json';
+import defaultSetting from './../data/defaultSetting.json';
 
 const {tags} = Store.store;
 
@@ -28,7 +28,7 @@ export default async originOptions => {
     when: !options.tag,
     default: 0,
     choices: Object.keys(tags).map(tag => ({
-      name: chalk.bold.whiteBright[ tags[tag] || defaultStore.tags.normal ](` ${tag} `),
+      name: chalk.bold.whiteBright[ tags[tag] || defaultSetting.tags.normal ](` ${tag} `),
       value: tag
     }))
   }]);
