@@ -21,11 +21,11 @@ export default () => {
     tagsTotal[tag] = 0;
   });
 
-  const total = Store.time.reduce((a, {tag, startTime, endTime}) => {
+  const total = Store.time.reduce((nowTotal, {tag, startTime, endTime}) => {
     const count = moment(endTime).format('x') - moment(startTime).format('x');
 
     tagsTotal[tag] = tagsTotal[tag] + count;
-    return a + count;
+    return nowTotal + count;
   }, 0);
 
   console.log(`Total: ${chalk.green(outputTime(total))}`);
