@@ -11,7 +11,7 @@ const {tags} = Store.store;
 
 const outputTime = time => {
   const output = moment.duration(time);
-  return `${output.hours()} hr ${output.minutes()} min ${output.seconds()} sec`;
+  return `${output.days() * 24 + output.hours()} hr ${output.minutes()} min ${output.seconds()} sec`;
 };
 
 export default () => {

@@ -13,7 +13,7 @@ export const getDiffTime = (startTime, endTime) => {
   const diff = endTime.format('x') - startTime.format('x');
   const diffTime = moment.duration(diff);
 
-  return `${diffTime.hours()} hr ${diffTime.minutes()} min ${diffTime.seconds()} sec`;
+  return `${diffTime.days() * 24 + diffTime.hours()} hr ${diffTime.minutes()} min ${diffTime.seconds()} sec`;
 };
 
 export const printTime = (tag, note, time) => {
