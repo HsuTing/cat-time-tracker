@@ -25,6 +25,7 @@ export default async originOptions => {
       moment(commit.date).format('x') > moment(outputTime[0].endTime).format('x')
   ));
   let commitIndex = 0;
+  console.log(commits.length);
 
   outputTime.forEach(({
     id,
@@ -52,7 +53,7 @@ export default async originOptions => {
     console.log(`${isEnd ? '  ' : '┃ '}`);
 
     if(!isEnd &&
-      moment(nowCommit.date).format('x') > moment(endTime).format('x') &&
+      moment(nowCommit.date).format('x') > moment(startTime).format('x') &&
       moment(nowCommit.date).format('x') < moment(outputTime[index + 1].startTime).format('x')
     ) {
       do {
