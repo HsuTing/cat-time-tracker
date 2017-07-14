@@ -66,10 +66,6 @@ yarn time-tracker count
 
 
 
-## TODO
-- [ ] output html
-- [ ] add git branch and commit
-
 ## License
 MIT © [HsuTing](http://hsuting.com)
 
