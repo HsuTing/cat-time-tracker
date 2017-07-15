@@ -53,6 +53,7 @@ export default async originOptions => {
     console.log(`${isEnd ? '  ' : '┃ '}`);
 
     if(!isEnd &&
+      nowCommit &&
       moment(nowCommit.date).format('x') > moment(startTime).format('x') &&
       moment(nowCommit.date).format('x') < moment(outputTime[index + 1].startTime).format('x')
     ) {
