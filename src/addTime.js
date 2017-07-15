@@ -21,7 +21,7 @@ export default async originOptions => {
     name: 'note',
     message: 'Add a note',
     when: !options.note,
-    default: ([...time].reverse()[0] || {}).note,
+    default: ([...time][0] || {}).note,
     validate: note => note ? true : 'Must add a note.'
   }, {
     type: 'list',
