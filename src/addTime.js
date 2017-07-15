@@ -12,6 +12,7 @@ import {getOptions} from 'utils/argv';
 import Store from './Store';
 import defaultSetting from './../data/defaultSetting.json';
 
+const {time} = Store;
 const {tags} = Store.store;
 
 export default async originOptions => {
@@ -20,6 +21,7 @@ export default async originOptions => {
     name: 'note',
     message: 'Add a note',
     when: !options.note,
+    default: ([...time].reverse()[0] || {}).note,
     validate: note => note ? true : 'Must add a note.'
   }, {
     type: 'list',
