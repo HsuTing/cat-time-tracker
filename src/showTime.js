@@ -25,7 +25,6 @@ export default async originOptions => {
       moment(commit.date).format('x') > moment(outputTime[0].endTime).format('x')
   ));
   let commitIndex = 0;
-  console.log(commits.length);
 
   outputTime.forEach(({
     id,
