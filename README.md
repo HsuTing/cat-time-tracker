@@ -70,6 +70,6 @@ yarn time-tracker count
 MIT © [HsuTing](http://hsuting.com)
 
 [npm-image]: https://badge.fury.io/js/cat-time-tracker.svg
-[npm-url]: https://npmjs.org/package/cat-time-tracker
+[npm-url]: https://www.npmjs.com/package/cat-time-tracker
 [travis-image]: https://travis-ci.org/HsuTing/cat-time-tracker.svg?branch=master
 [travis-url]: https://travis-ci.org/HsuTing/cat-time-tracker
