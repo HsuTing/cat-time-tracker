@@ -7,13 +7,11 @@
       "website": false,
       "chooseType": "none",
       "plugins": [
-        "npm",
-        "test"
+        "npm"
       ]
     },
     "plugins": [
-      "npm",
-      "test"
+      "npm"
     ],
     "alias": {
       "utils": "utils"
