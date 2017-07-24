@@ -7,3 +7,4 @@ yarn.lock
 .yo-rc.json
 test
 coverage
+.time-tracker.json
