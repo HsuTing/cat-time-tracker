@@ -14,6 +14,7 @@ export default async (keys = []) => {
   console.log(chalk.cyan('Add the config of firebase'));
 
   const result = await inquirer.prompt(keys.map(key => ({
+    type: key === 'password' ? 'password' : 'text',
     name: key,
     message: key,
     validate: value => value !== '' ? true : 'Can not be empty.'
@@ -29,7 +30,10 @@ export default async (keys = []) => {
       if(err)
         reject(err);
 
-      resolve(result);
+      resolve({
+        ...result,
+        needToAddUser: true
+      });
     });
   });
 };

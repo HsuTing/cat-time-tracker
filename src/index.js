@@ -5,9 +5,14 @@ import 'babel-polyfill';
 import fs from 'fs';
 import path from 'path';
 import process from 'process';
+import chalk from 'chalk';
 
 import addConfig from './addConfig';
 import firebaseInit from './firebase/init';
+import {
+  add as addUser,
+  login as userLogin
+} from './firebase/user.js';
 import {
   setting as getSetting
 } from './firebase/get';
@@ -20,7 +25,9 @@ const keys = [
   'databaseURL',
   'projectId',
   'storageBucket',
-  'messagingSenderId'
+  'messagingSenderId',
+  'email',
+  'password'
 ];
 
 let root = process.cwd();
@@ -34,18 +41,35 @@ do {
 } while(!check && root !== '/')
 
 (async () => {
+  const command = process.argv[2];
+
   try {
-    const config = root === '/' ?
+    const {needToAddUser, email, password, ...config} = root === '/' ?
       (await addConfig(keys)) :
       require(path.resolve(root, '.time-tracker.json'));
-    const pkg = getPkg();
 
     firebaseInit(config);
+    if(needToAddUser)
+      await addUser(email, password);
+    await userLogin(email, password)
 
-    const setting = await getSetting();
+    switch(command) {
+      case 'init':
+        if(root !== '/')
+          console.log(`${chalk.cyan('Find .time-tracker.json:')} ${root}/.time-tracker.json`);
+        break;
 
-    await addTimeTracker(pkg, setting);
+      default: {
+        const setting = await getSetting();
+        const pkg = await getPkg();
+
+        await addTimeTracker(pkg, setting);
+        break;
+      }
+    }
   } catch(e) {
     console.log(e);
   }
+
+  process.exit();
 })();
