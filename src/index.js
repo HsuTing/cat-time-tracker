@@ -19,8 +19,9 @@ import {
 } from './firebase/get';
 import getPkg from './getPkg';
 
-import addTimeTracker from './addTimeTracker';
 import addTodo from './addTodo';
+import addDone from './addDone';
+import addTimeTracker from './addTimeTracker';
 
 const keys = [
   'apiKey',
@@ -78,6 +79,14 @@ do {
         const setting = await getSetting();
 
         await addTodo(pkg, setting);
+        break;
+      }
+
+      case 'done': {
+        const pkg = await getPkg();
+        const todo = await getTodo(pkg);
+
+        await addDone(pkg, todo);
         break;
       }
 

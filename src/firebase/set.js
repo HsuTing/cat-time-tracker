@@ -23,7 +23,7 @@ export const newTimeTracker = async (name, {
   return true;
 };
 
-export const todo = async(name, {
+export const todo = async (name, {
   tag,
   note
 }) => {
@@ -35,6 +35,15 @@ export const todo = async(name, {
     tag,
     note
   });
+
+  return true;
+};
+
+export const done = async (name, {
+  id
+}) => {
+  await firebase.database().ref(`/projects/${name}/todo/${id}`)
+    .update({status: 'done'});
 
   return true;
 };
