@@ -11,7 +11,7 @@ const store = memFs.create();
 const fs = editor.create(store);
 
 export default async (keys = []) => {
-  console.log(chalk.cyan('Add the config of firebase'));
+  console.log(chalk.cyan('Add the config of firebase.'));
 
   const result = await inquirer.prompt(keys.map(key => ({
     type: key === 'password' ? 'password' : 'text',

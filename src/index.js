@@ -30,16 +30,26 @@ const keys = [
   'password'
 ];
 
+
+// check path
 let root = process.cwd();
-let check = false;
+let check_config = fs.existsSync(path.resolve(root, '.time-tracker.json'));
+let temp_root = process.cwd();
 
 do {
-  check = fs.existsSync(path.resolve(root, '.time-tracker.json'));
+  check_config = check_config || fs.existsSync(path.resolve(temp_root, '.time-tracker.json'));
 
-  if(!check)
-    root = path.resolve(root, './../');
-} while(!check && root !== '/')
+  if(fs.existsSync(path.resolve(temp_root, '.git')) && check_config)
+    console.error(chalk.red('warning: ".time-tracker.json" should not be included in git.'));
 
+  temp_root = path.resolve(temp_root, './../');
+
+  if(!check_config)
+    root = temp_root;
+} while(temp_root !== '/')
+
+
+// main function
 (async () => {
   const command = process.argv[2];
 
@@ -56,7 +66,7 @@ do {
     switch(command) {
       case 'init':
         if(root !== '/')
-          console.log(`${chalk.cyan('Find .time-tracker.json:')} ${root}/.time-tracker.json`);
+          console.log(`${chalk.cyan('Find ".time-tracker.json":')} ${root}/.time-tracker.json`);
         break;
 
       default: {
