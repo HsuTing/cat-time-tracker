@@ -14,10 +14,13 @@ import {
   login as userLogin
 } from './firebase/user.js';
 import {
-  setting as getSetting
+  setting as getSetting,
+  todo as getTodo
 } from './firebase/get';
 import getPkg from './getPkg';
+
 import addTimeTracker from './addTimeTracker';
+import addTodo from './addTodo';
 
 const keys = [
   'apiKey',
@@ -52,6 +55,7 @@ do {
 // main function
 (async () => {
   const command = process.argv[2];
+  let interval = null;
 
   try {
     const {needToAddUser, email, password, ...config} = root === '/' ?
@@ -63,17 +67,26 @@ do {
       await addUser(email, password);
     await userLogin(email, password)
 
-    switch(command) {
+    switch((command || '').toLowerCase()) {
       case 'init':
         if(root !== '/')
           console.log(`${chalk.cyan('Find ".time-tracker.json":')} ${root}/.time-tracker.json`);
         break;
 
+      case 'todo': {
+        const pkg = await getPkg();
+        const setting = await getSetting();
+
+        await addTodo(pkg, setting);
+        break;
+      }
+
       default: {
         const setting = await getSetting();
         const pkg = await getPkg();
+        const todo = await getTodo(pkg);
 
-        await addTimeTracker(pkg, setting);
+        interval = await addTimeTracker(pkg, setting, todo);
         break;
       }
     }
@@ -81,5 +94,6 @@ do {
     console.log(e);
   }
 
-  process.exit();
+  if(!interval)
+    process.exit();
 })();

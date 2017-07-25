@@ -21,3 +21,13 @@ export const setting = async () => {
   await firebase.database().ref('/setting/').set(defaultSetting);
   return defaultSetting;
 };
+
+export const todo = async ({name}) => {
+  const snapshot = await firebase.database().ref(`/projects/${name}/todo/`).once('value');
+  const value = snapshot.val();
+
+  return value ? Object.keys(value).map(key => ({
+    id: key,
+    ...value[key]
+  })).filter(({status}) => status !== 'done') : [];
+};

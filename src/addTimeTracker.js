@@ -8,11 +8,25 @@ import {
   newTimeTracker as setNewTimeTracker
 } from './firebase/set';
 
-export default async ({name}, {timerColor, format, tags}) => {
-  const {note, tag} = await inquirer.prompt([{
+export default async ({name}, {timerColor, format, tags}, todoChoices) => {
+  const {todo, ...result} = await inquirer.prompt([{
+    type: 'list',
+    name: 'todo',
+    message: 'Choose a todo',
+    default: 'custom',
+    choices: todoChoices.map(todo => ({
+      name: todo.note,
+      value: todo
+    })).concat([{
+      name: 'custom',
+      value: 'custom'
+    }]),
+    when: todoChoices.length !== 0
+  }, {
     name: 'note',
     message: 'Add a note',
-    validate: note => note ? true : 'Must add a note.'
+    validate: note => note ? true : 'Must add a note.',
+    when: ({todo}) => todoChoices.length === 0 || todo === 'custom'
   }, {
     type: 'list',
     name: 'tag',
@@ -21,13 +35,19 @@ export default async ({name}, {timerColor, format, tags}) => {
     choices: Object.keys(tags).map(tag => ({
       name: chalk.bold.whiteBright[ tags[tag] ](` ${tag} `),
       value: tag
-    }))
+    })),
+    when: ({todo}) => todoChoices.length === 0 || todo === 'custom'
   }]);
 
+  const {id, note, tag} = todo === 'custom' ? {
+    id: 'custom',
+    ...result
+  } : todo;
   const start = moment();
+
   process.on('SIGINT', async () => {
-    if(await setNewTimeTracker({
-      name,
+    if(await setNewTimeTracker(name, {
+      id,
       note,
       tag,
       start: start.format(format),
@@ -38,7 +58,7 @@ export default async ({name}, {timerColor, format, tags}) => {
     }
   });
 
-  setInterval(() => {
+  return setInterval(() => {
     const end = moment();
     const diff = end.format('x') - start.format('x');
     const diffTime = moment.duration(diff);
