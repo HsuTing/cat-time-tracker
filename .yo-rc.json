@@ -4,18 +4,38 @@
       "authorName": "HsuTing",
       "authorEmail": "hsuting0106@gmail.com",
       "authorUrl": "http://hsuting.com",
-      "website": false,
-      "chooseType": "none",
+      "website": true,
+      "chooseType": "server",
       "plugins": [
         "npm"
-      ]
+      ],
+      "graphql": true,
+      "subject": "Time tracker",
+      "otherSettings": [],
+      "server": false
     },
     "plugins": [
-      "npm"
+      "npm",
+      "server",
+      "test",
+      "graphql",
+      "react",
+      "relay"
     ],
     "alias": {
-      "utils": "utils"
+      "utils": "utils",
+      "public": "public",
+      "components": "components",
+      "componentsShare": "components/share",
+      "containers": "containers",
+      "routers": "routers",
+      "schemas": "schemas"
     },
-    "cat": true
+    "cat": true,
+    "template": {
+      "subject": "Time tracker",
+      "url": "https://hsuting.github.io/cat-time-tracker/",
+      "otherSettings": []
+    }
   }
 }

@@ -21,6 +21,7 @@ import getPkg from './getPkg';
 
 import addTodo from './addTodo';
 import addDone from './addDone';
+import openServer from './openServer';
 import addTimeTracker from './addTimeTracker';
 
 const keys = [
@@ -56,7 +57,6 @@ do {
 // main function
 (async () => {
   const command = process.argv[2];
-  let interval = null;
 
   try {
     const {needToAddUser, email, password, ...config} = root === '/' ?
@@ -90,19 +90,23 @@ do {
         break;
       }
 
+      case 'show': {
+        openServer();
+        return;
+      }
+
       default: {
         const setting = await getSetting();
         const pkg = await getPkg();
         const todo = await getTodo(pkg);
 
-        interval = await addTimeTracker(pkg, setting, todo);
-        break;
+        await addTimeTracker(pkg, setting, todo);
+        return;
       }
     }
   } catch(e) {
     console.log(e);
   }
 
-  if(!interval)
-    process.exit();
+  process.exit();
 })();

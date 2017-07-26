@@ -1,5 +1,6 @@
 'use strict';
 
+import moment from 'moment';
 import * as firebase from 'firebase';
 
 const defaultSetting = {
@@ -30,4 +31,17 @@ export const todo = async ({name}) => {
     id: key,
     ...value[key]
   })).filter(({status}) => status !== 'done') : [];
+};
+
+export const time = async ({name}) => {
+  const snapshot = await firebase.database().ref(`/projects/${name}/time/`).once('value');
+  const value = snapshot.val();
+
+  return value ? Object.keys(value).map(key => ({
+    todo_id: value[key].id,
+    ...value[key],
+    id: key
+  })).sort((a, b) => {
+    return moment(b.end).format('x') - moment(a.end).format('x')
+  }) : [];
 };

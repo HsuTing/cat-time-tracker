@@ -18,6 +18,7 @@ module.exports = {
   },
   "extends": [
     "google",
+    "plugin:react/recommended",
     "eslint:recommended"
   ],
   "parser": "babel-eslint",
@@ -33,9 +34,14 @@ module.exports = {
     "node": true
   },
   "plugins": [
+    "react",
     "import"
   ],
   "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.3"
+    },
     "import/resolver": {
       "babel-module": alias
     }

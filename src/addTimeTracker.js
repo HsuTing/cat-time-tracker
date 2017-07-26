@@ -8,7 +8,7 @@ import {
   newTimeTracker as setNewTimeTracker
 } from './firebase/set';
 
-export default async ({name}, {timerColor, format, tags}, todoChoices) => {
+export default async ({name}, {timerColor, tags}, todoChoices) => {
   const {todo, ...result} = await inquirer.prompt([{
     type: 'list',
     name: 'todo',
@@ -50,8 +50,8 @@ export default async ({name}, {timerColor, format, tags}, todoChoices) => {
       id,
       note,
       tag,
-      start: start.format(format),
-      end: moment().format(format)
+      start: start.format(),
+      end: moment().format()
     })) {
       console.log();
       process.exit();

@@ -1,14 +1,24 @@
 {
   "presets": [
+    "react",
     "env",
     "stage-0"
   ],
   "plugins": [
+    "relay",
+    "transform-decorators-legacy",
     "transform-object-assign",
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "utils": "utils"
+        "utils": "utils",
+        "public": "server/public",
+        "components": "server/components",
+        "componentsShare": "server/components/share",
+        "containers": "server/containers",
+        "routers": "server/routers",
+        "schemas": "server/schemas",
+        "db": "firebase"
       }
     }]
   ]

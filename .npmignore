@@ -8,3 +8,4 @@ yarn.lock
 test
 coverage
 .time-tracker.json
+schema.graphql
