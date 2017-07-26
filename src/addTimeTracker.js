@@ -4,6 +4,8 @@ import chalk from 'chalk';
 import moment from 'moment';
 import inquirer from 'inquirer';
 
+import {getTime} from 'utils/time';
+
 import {
   newTimeTracker as setNewTimeTracker
 } from './firebase/set';
@@ -60,19 +62,12 @@ export default async ({name}, {timerColor, tags}, todoChoices) => {
 
   return setInterval(() => {
     const end = moment();
-    const diff = end.format('x') - start.format('x');
-    const diffTime = moment.duration(diff);
+    const {hours, minutes, seconds} = getTime(start, end);
 
     process.stdout.write(`\r${
       chalk.whiteBright.bold[ tags[tag] ](` ${tag} `)
     } ${
-      chalk[ timerColor ](`(${
-        diffTime.days() * 24 + diffTime.hours()
-      } hr ${
-        diffTime.minutes()
-      } min ${
-        diffTime.seconds()
-      } sec)`)
+      chalk[ timerColor ](`(${hours} hr ${minutes} min ${seconds} sec)`)
     } ${
       note
     }`);

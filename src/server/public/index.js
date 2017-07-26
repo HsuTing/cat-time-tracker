@@ -7,7 +7,9 @@ import Index from 'components/Index';
 
 (() => {
   ReactDOM.render(
-    <Index />,
+    <Index data={data}
+      router={{isServer: false}}
+    />,
     document.getElementById('root')
   );
 })();

@@ -1,6 +1,8 @@
 'use strict';
 
+import 'babel-polyfill';
 import fs from 'fs';
+import path from 'path';
 import {
   GraphQLSchema,
   GraphQLObjectType
@@ -12,6 +14,9 @@ let mutation = {};
 fs.readdirSync(__dirname)
   .filter(file => !(file[0] === '.' || file === 'schema.js'))
   .forEach(file => {
+    if(!fs.existsSync(path.resolve(__dirname, `./${file}/index.js`)))
+      return;
+
     const name = file.replace('.js', '');
     const schema = require(`./${name}`).default || require(`./${name}`);
 

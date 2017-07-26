@@ -90,7 +90,7 @@ do {
         break;
       }
 
-      case 'show': {
+      case 'start': {
         openServer();
         return;
       }

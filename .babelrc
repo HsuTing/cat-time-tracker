@@ -18,7 +18,8 @@
         "containers": "server/containers",
         "routers": "server/routers",
         "schemas": "server/schemas",
-        "db": "firebase"
+        "db": "firebase",
+        "constants": "server/constants"
       }
     }]
   ]
