@@ -18,6 +18,8 @@ export default class TimeLine extends React.Component {
     time: PropTypes.object.isRequired,
     format: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
+    chooseTags: PropTypes.array.isRequired,
+    modifyChooseTags: PropTypes.func.isRequired,
     relay: PropTypes.object.isRequired
   }
 
@@ -32,13 +34,21 @@ export default class TimeLine extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(JSON.stringify(this.props.time) !== JSON.stringify(nextProps.time) ||
+      JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data) ||
       this.props.format !== nextProps.format)
       this.setState({time: this.timelineData(nextProps)});
+
+    if(JSON.stringify(this.props.chooseTags) !== JSON.stringify(nextProps.chooseTags))
+      this.props.relay.refetch({
+        tags: nextProps.chooseTags
+      }, null);
   }
 
   shouldComponentUpdate(nextProps) {
     return (
       JSON.stringify(this.props.time) !== JSON.stringify(nextProps.time) ||
+      JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data) ||
+      JSON.stringify(this.props.chooseTags) !== JSON.stringify(nextProps.chooseTags) ||
       this.props.format !== nextProps.format
     );
   }
@@ -54,9 +64,14 @@ export default class TimeLine extends React.Component {
   }
 
   filterTime(tag) {
-    return () => this.props.relay.refetch({
-      tags: [tag]
-    }, null);
+    const {relay, modifyChooseTags} = this.props;
+
+    return () => {
+      relay.refetch({
+        tags: [tag]
+      }, null);
+      modifyChooseTags([tag]);
+    };
   }
 
   timelineData({time, format, data}) {

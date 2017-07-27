@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import radium from 'radium';
+import Toggle from 'cat-components/lib/toggle';
 
 import * as style from './style/tag';
 
@@ -11,7 +12,8 @@ export default class Tags extends React.Component {
   static propTypes = {
     setting: PropTypes.object.isRequired,
     tag: PropTypes.string,
-    children: PropTypes.element
+    chooseTags: PropTypes.array,
+    modifyChooseTags: PropTypes.func
   }
 
   constructor(props) {
@@ -19,34 +21,44 @@ export default class Tags extends React.Component {
     this.state = {
       colors: this.getColors(props)
     };
+
+    this.modifyChooseTags = this.modifyChooseTags.bind(this);
+  }
+
+  componentDidMount() {
+    const {tag, modifyChooseTags} = this.props;
+    const {colors} = this.state;
+
+    if(!tag)
+      modifyChooseTags(Object.keys(colors));
   }
 
   componentWillReceiveProps(nextProps) {
     if(JSON.stringify(this.props.setting) !== JSON.stringify(nextProps.setting))
-      this.setState({colors: this.getColoc(nextProps)});
+      this.setState({colors: this.getColors(nextProps)});
   }
 
   shouldComponentUpdate(nextProps) {
     return (
       JSON.stringify(this.props.setting) !== JSON.stringify(nextProps.setting) ||
+      JSON.stringify(this.props.chooseTags) !== JSON.stringify(nextProps.chooseTags) ||
       this.props.tag !== nextProps.tag
     );
   }
 
   render() {
-    const {tag, children, ...props} = this.props;
+    const {tag, chooseTags, ...props} = this.props;
     const {colors} = this.state;
 
     delete props.setting;
     delete props.relay;
+    delete props.modifyChooseTags;
 
     if(tag)
       return (
         <h2 {...props}
           style={[style.root, props.style]}
         >
-          {children}
-
           <font style={style.background(colors[tag])}
           >{tag[0].toUpperCase() + tag.slice(1)}</font>
         </h2>
@@ -58,8 +70,12 @@ export default class Tags extends React.Component {
           <h2 key={index}
             {...props}
             style={[style.root, props.style]}
+            onClick={this.modifyChooseTags(name)}
           >
-            {children}
+            <Toggle rootStyle={() => style.toggle}
+              clicked={chooseTags.includes(name)}
+              checked
+            />
 
             <font style={style.background(colors[name])}
             >{name[0].toUpperCase() + name.slice(1)}</font>
@@ -67,6 +83,17 @@ export default class Tags extends React.Component {
         ))}
       </div>
     );
+  }
+
+  modifyChooseTags(tag) {
+    return () => {
+      const {modifyChooseTags, chooseTags} = this.props;
+
+      if(chooseTags.includes(tag))
+        modifyChooseTags([...chooseTags].filter(oldtag => oldtag !== tag));
+      else
+        modifyChooseTags([...chooseTags].concat([tag]));
+    };
   }
 
   getColors({setting}) {

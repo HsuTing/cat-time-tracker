@@ -29,12 +29,6 @@ export const tags = {
   lineHeight: '25px'
 };
 
-export const toggle = {
-  margin: '0px 5px 0px 0px',
-  color: grey._500_,
-  verticalAlign: 'top'
-};
-
 export const timeline = {
   margin: '100px 0px 0px'
 };
