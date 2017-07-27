@@ -8,7 +8,13 @@ import {
   GraphQLObjectType
 } from 'graphql';
 
-let query = {};
+import fields from 'schemas/fields';
+
+const {nodeField} = fields;
+
+let query = {
+  node: nodeField
+};
 let mutation = {};
 
 fs.readdirSync(__dirname)

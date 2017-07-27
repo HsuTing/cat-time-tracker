@@ -15,6 +15,10 @@ class Index extends React.Component {
     data: PropTypes.object.isRequired
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     return (
       <div>

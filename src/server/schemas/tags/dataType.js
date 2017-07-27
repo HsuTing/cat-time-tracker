@@ -36,7 +36,7 @@ const dataType = new GraphQLObjectType({
 });
 
 const {connectionType: tagsConnection} =
-        connectionDefinitions({name: 'tags', nodeType: dataType});
+  connectionDefinitions({name: 'tags', nodeType: dataType});
 
 export default dataType;
 export const tagsGroupType = new GraphQLObjectType({

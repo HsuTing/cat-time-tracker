@@ -7,3 +7,4 @@ coverage
 lib
 .time-tracker.json
 schema.graphql
+__generated__

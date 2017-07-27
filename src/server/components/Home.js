@@ -6,6 +6,7 @@ import radium from 'radium';
 import moment from 'moment';
 import Timeline from 'cat-components/lib/timeline';
 
+import Tag from 'componentsShare/Tag';
 import {getTime} from 'utils/time';
 
 import * as style from './style/home';
@@ -19,11 +20,8 @@ export default class Home extends React.Component {
       start: PropTypes.string.isRequired,
       end: PropTypes.string.isRequired
     })).isRequired,
-    tags: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      color: PropTypes.string.isRequired
-    })).isRequired,
-    format: PropTypes.string.isRequired
+    format: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -34,8 +32,16 @@ export default class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(JSON.stringify(this.props.time) !== JSON.stringify(nextProps.time))
+    if(JSON.stringify(this.props.time) !== JSON.stringify(nextProps.time) ||
+      this.props.format !== nextProps.format)
       this.setState({time: this.timelineData(nextProps)});
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      JSON.stringify(this.props.time) !== JSON.stringify(nextProps.time) ||
+      this.props.format !== nextProps.format
+    );
   }
 
   render() {
@@ -48,27 +54,19 @@ export default class Home extends React.Component {
     );
   }
 
-  timelineData({time, format, tags}) {
-    const tagsColor = {};
-
-    tags.forEach(tag => {
-      tagsColor[tag.name] = tag.color;
-    });
-
+  timelineData({time, format, data}) {
     return time.map(({tag, note, start, end}) => {
       const startTime = moment(start);
       const endTime = moment(end);
       const {hours, minutes, seconds} = getTime(startTime, endTime);
-      const title = tag[0].toUpperCase() + tag.slice(1);
 
       return {
         date: moment(start).format(format),
         content: (
           <div>
-            <h2 style={style.content.tag}>
-              <font style={style.content.tagBackground(tagsColor[tag])}
-              >{title}</font>
-            </h2>
+            <Tag tag={tag}
+              tags={data.setting}
+            />
 
             <p style={style.content.note}
             >{note}</p>

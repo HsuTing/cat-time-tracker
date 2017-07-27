@@ -45,7 +45,7 @@ const dataType = new GraphQLObjectType({
 });
 
 const {connectionType: timeConnection} =
-        connectionDefinitions({name: 'time', nodeType: dataType});
+  connectionDefinitions({name: 'time', nodeType: dataType});
 
 export default dataType;
 export const timeGroupType = new GraphQLObjectType({

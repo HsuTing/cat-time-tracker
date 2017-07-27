@@ -28,16 +28,7 @@ export default () => (
           }
         }
         setting {
-          tags {
-            tagsGroup {
-              edges {
-                node {
-                  name
-                  color
-                }
-              }
-            }
-          }
+          ...Tags_tags
           format
         }
       }
@@ -52,7 +43,7 @@ export default () => (
         return (
           <Home time={time.timeGroup.edges.map(({node}) => node)}
             format={setting.format}
-            tags={setting.tags.tagsGroup.edges.map(({node}) => node)}
+            data={props}
           />
         );
       }
