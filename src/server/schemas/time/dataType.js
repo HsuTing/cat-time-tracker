@@ -2,7 +2,8 @@
 
 import {
   GraphQLObjectType,
-  GraphQLString
+  GraphQLString,
+  GraphQLList
 } from 'graphql';
 import {
   connectionDefinitions,
@@ -57,8 +58,28 @@ export const timeGroupType = new GraphQLObjectType({
     timeGroup: {
       type: timeConnection,
       description: 'This is the group of the Time.',
-      args: connectionArgs,
-      resolve: (data, args) => connectionFromArray(data || [], args)
+      args: {
+        ...connectionArgs,
+        tags: {
+          type: new GraphQLList(GraphQLString),
+          description: 'Use to filter the time with the tag.'
+        },
+        todo_ids: {
+          type: new GraphQLList(GraphQLString),
+          description: 'Use to filter the time with the todo id.'
+        }
+      },
+      resolve: (data, {tags, todo_ids, ...args}) => {
+        let output = data || [];
+
+        if(tags)
+          output = [...output].filter(({tag}) => tags.length === 0 || tags.includes(tag));
+
+        if(todo_ids)
+          output = [...output].filter(({todo_id}) => todo_ids.length === 0 || todo_ids.includes(todo_id));
+
+        return connectionFromArray(output, args)
+      }
     }
   })
 });

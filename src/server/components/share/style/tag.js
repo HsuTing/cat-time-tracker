@@ -3,7 +3,9 @@
 import white from 'cat-components/lib/color/white';
 
 export const root = {
-  margin: '0px 0px 15px'
+  margin: '0px 0px 15px',
+  userSelect: 'none',
+  cursor: 'pointer'
 };
 
 export const background = color => ({

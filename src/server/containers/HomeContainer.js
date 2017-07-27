@@ -13,36 +13,29 @@ import environment from 'utils/environment';
 /* eslint-disable react/display-name */
 export default () => (
   <QueryRenderer environment={environment}
-    query={graphql`
-      query HomeContainerQuery {
+    query={graphql.experimental`
+      query HomeContainerQuery($tags: [String]) {
         time {
-          timeGroup {
-            edges {
-              node {
-                tag
-                note
-                start
-                end
-              }
-            }
-          }
+          ...TimelineContainer_time @arguments(tags: $tags)
         }
         setting {
-          ...Tags_setting
+          ...TagsContainer_setting
           format
         }
       }
     `}
+    variables={{
+      tags: []
+    }}
     render={({error, props}) => {
       if(error)
         return <div>{error.message}</div>;
       /* eslint-disable react/prop-types */
       else if(props) {
-        const {time, setting} = props;
+        const {setting} = props;
 
         return (
-          <Home time={time.timeGroup.edges.map(({node}) => node)}
-            format={setting.format}
+          <Home format={setting.format}
             data={props}
           />
         );

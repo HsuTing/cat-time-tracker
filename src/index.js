@@ -59,7 +59,7 @@ do {
   const command = process.argv[2];
 
   try {
-    const {needToAddUser, email, password, ...config} = root === '/' ?
+    const {needToAddUser, email, password, port, ...config} = root === '/' ?
       (await addConfig(keys)) :
       require(path.resolve(root, '.time-tracker.json'));
 
@@ -91,7 +91,7 @@ do {
       }
 
       case 'start': {
-        openServer();
+        openServer(port);
         return;
       }
 

@@ -26,9 +26,7 @@ export const tags = {
   display: 'inline-block',
   margin: '0px 15px 0px 0px',
   fontSize: '15px',
-  lineHeight: '25px',
-  userSelect: 'none',
-  cursor: 'pointer'
+  lineHeight: '25px'
 };
 
 export const toggle = {
@@ -38,23 +36,5 @@ export const toggle = {
 };
 
 export const timeline = {
-  root: {
-    margin: '100px 0px 0px'
-  },
-
-  title: {
-    display: 'inline-block',
-    width: '35px'
-  },
-
-  time: {
-    margin: '2px 0px',
-    fontSize: '12px',
-    color: grey._500_
-  },
-
-  note: {
-    margin: '10px 0px 15px',
-    minHeight: '70px'
-  }
+  margin: '100px 0px 0px'
 };

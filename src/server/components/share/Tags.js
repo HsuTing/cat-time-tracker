@@ -2,16 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  createFragmentContainer,
-  graphql
-} from 'react-relay';
 import radium from 'radium';
 
 import * as style from './style/tag';
 
 @radium
-class Tags extends React.Component {
+export default class Tags extends React.Component {
   static propTypes = {
     setting: PropTypes.object.isRequired,
     tag: PropTypes.string,
@@ -85,20 +81,3 @@ class Tags extends React.Component {
     return colors;
   }
 }
-
-export default createFragmentContainer(
-  Tags, graphql`
-    fragment Tags_setting on Setting {
-      tags {
-        tagsGroup {
-          edges {
-            node {
-              name
-              color
-            }
-          }
-        }
-      }
-    }
-  `
-);
