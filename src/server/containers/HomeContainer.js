@@ -28,7 +28,7 @@ export default () => (
           }
         }
         setting {
-          ...Tags_tags
+          ...Tags_setting
           format
         }
       }

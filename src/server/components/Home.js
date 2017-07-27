@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import radium from 'radium';
 import moment from 'moment';
 import Timeline from 'cat-components/lib/timeline';
+import Toggle from 'cat-components/lib/toggle';
+import * as grey from 'cat-components/lib/color/grey';
 
-import Tag from 'componentsShare/Tag';
+import Tags from 'componentsShare/Tags';
 import {getTime} from 'utils/time';
 
 import * as style from './style/home';
@@ -45,11 +47,32 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const {data} = this.props;
     const {time} = this.state;
 
     return (
       <div>
-        <Timeline time={time} />
+        <div style={style.grid}>
+          <div style={style.col}>
+            <Tags style={style.tags}
+              setting={data.setting}
+            >
+              <Toggle rootStyle={() => style.toggle}
+                checked
+              />
+            </Tags>
+          </div>
+
+          <div style={style.col}>
+            todo
+          </div>
+        </div>
+
+        <div style={style.timeline.root}>
+          <Timeline time={time}
+            color={grey._200_}
+          />
+        </div>
       </div>
     );
   }
@@ -64,11 +87,11 @@ export default class Home extends React.Component {
         date: moment(start).format(format),
         content: (
           <div>
-            <Tag tag={tag}
-              tags={data.setting}
+            <Tags tag={tag}
+              setting={data.setting}
             />
 
-            <p style={style.content.note}
+            <p style={style.timeline.note}
             >{note}</p>
 
             {[{
@@ -82,9 +105,9 @@ export default class Home extends React.Component {
               time: `${hours} hr ${minutes} min ${seconds} sec`
             }].map(({title, time}, timeIndex) => (
               <p key={timeIndex}
-                style={style.content.time}
+                style={style.timeline.time}
               >
-                <font style={style.content.title}>{title}</font>
+                <font style={style.timeline.title}>{title}</font>
 
                 {time}
               </p>
