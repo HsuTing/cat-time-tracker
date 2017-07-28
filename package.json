@@ -51,7 +51,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "cat-graphql": "^0.1.1",
+    "cat-graphql": "^0.1.2",
     "concurrently": "^3.5.0",
     "eslint": "^4.3.0",
     "eslint-config-google": "^0.9.1",

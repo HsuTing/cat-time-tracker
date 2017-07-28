@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import radium from 'radium';
 import moment from 'moment';
+import RelayTypes from 'cat-graphql';
 import CatTimeline from 'cat-components/lib/timeline';
 import * as grey from 'cat-components/lib/color/grey';
 
@@ -15,11 +16,19 @@ import * as style from './style/timeline';
 @radium
 export default class TimeLine extends React.Component {
   static propTypes = {
-    time: PropTypes.object.isRequired,
+    time: PropTypes.shape({
+      timeGroup: RelayTypes({
+        tag: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired,
+        start: PropTypes.string.isRequired,
+        end: PropTypes.string.isRequired
+      })
+    }).isRequired,
     format: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
-    chooseTags: PropTypes.array.isRequired,
+    chooseTags: PropTypes.arrayOf(PropTypes.string).isRequired,
     modifyChooseTags: PropTypes.func.isRequired,
+    chooseTodo: PropTypes.arrayOf(PropTypes.string).isRequired,
     relay: PropTypes.object.isRequired
   }
 
@@ -38,10 +47,14 @@ export default class TimeLine extends React.Component {
       this.props.format !== nextProps.format)
       this.setState({time: this.timelineData(nextProps)});
 
-    if(JSON.stringify(this.props.chooseTags) !== JSON.stringify(nextProps.chooseTags))
+    if(JSON.stringify(this.props.chooseTags) !== JSON.stringify(nextProps.chooseTags) ||
+      JSON.stringify(this.props.chooseTodo) !== JSON.stringify(nextProps.chooseTodo)
+    ) {
       this.props.relay.refetch({
-        tags: nextProps.chooseTags
+        tags: nextProps.chooseTags,
+        todo_ids: nextProps.chooseTodo
       }, null);
+    }
   }
 
   shouldComponentUpdate(nextProps) {

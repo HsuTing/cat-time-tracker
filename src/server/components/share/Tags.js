@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import radium from 'radium';
+import RelayTypes from 'cat-graphql';
 import Toggle from 'cat-components/lib/toggle';
 
 import * as style from './style/tag';
@@ -10,9 +11,16 @@ import * as style from './style/tag';
 @radium
 export default class Tags extends React.Component {
   static propTypes = {
-    setting: PropTypes.object.isRequired,
+    setting: PropTypes.shape({
+      tags: PropTypes.shape({
+        tagsGroup: RelayTypes({
+          name: PropTypes.string.isRequired,
+          color: PropTypes.string.isRequired
+        })
+      }).isRequired
+    }).isRequired,
     tag: PropTypes.string,
-    chooseTags: PropTypes.array,
+    chooseTags: PropTypes.arrayOf(PropTypes.string),
     modifyChooseTags: PropTypes.func
   }
 

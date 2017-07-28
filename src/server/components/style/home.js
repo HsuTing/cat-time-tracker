@@ -7,7 +7,7 @@ export const grid = {
   display: 'grid',
   gridTemplateColumns: 'calc(50% - 15px) calc(50% - 15px)',
   gridGap: '30px',
-  ...layoutStyle.phone({
+  ...layoutStyle.tablet({
     gridTemplateColumns: 'initial'
   })
 };

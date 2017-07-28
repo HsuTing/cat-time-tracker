@@ -14,9 +14,12 @@ import environment from 'utils/environment';
 export default () => (
   <QueryRenderer environment={environment}
     query={graphql.experimental`
-      query HomeContainerQuery($tags: [String]) {
+      query HomeContainerQuery($tags: [String] $todo_ids: [String]) {
         time {
-          ...TimelineContainer_time @arguments(tags: $tags)
+          ...TimelineContainer_time @arguments(tags: $tags todo_ids: $todo_ids)
+        }
+        todo {
+          ...TodoContainer_todo
         }
         setting {
           ...TagsContainer_setting
@@ -25,7 +28,8 @@ export default () => (
       }
     `}
     variables={{
-      tags: []
+      tags: [],
+      todo_ids: []
     }}
     render={({error, props}) => {
       if(error)

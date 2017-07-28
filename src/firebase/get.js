@@ -23,14 +23,14 @@ export const setting = async () => {
   return defaultSetting;
 };
 
-export const todo = async ({name}) => {
+export const todo = async ({name}, statusArray = ['done']) => {
   const snapshot = await firebase.database().ref(`/projects/${name}/todo/`).once('value');
   const value = snapshot.val();
 
   return value ? Object.keys(value).map(key => ({
     id: key,
     ...value[key]
-  })).filter(({status}) => status !== 'done') : [];
+  })).filter(({status}) => statusArray.includes(status)) : [];
 };
 
 export const time = async ({name}) => {

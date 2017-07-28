@@ -9,7 +9,8 @@ import {
   connectionDefinitions,
   connectionArgs,
   connectionFromArray,
-  globalIdField
+  globalIdField,
+  fromGlobalId
 } from 'graphql-relay';
 
 import fields from 'schemas/fields';
@@ -75,10 +76,13 @@ export const timeGroupType = new GraphQLObjectType({
         if(tags)
           output = [...output].filter(({tag}) => tags.length === 0 || tags.includes(tag));
 
-        if(todo_ids)
-          output = [...output].filter(({todo_id}) => todo_ids.length === 0 || todo_ids.includes(todo_id));
+        if(todo_ids) {
+          const ids = todo_ids.map(todo_id => fromGlobalId(todo_id).id);
 
-        return connectionFromArray(output, args)
+          output = [...output].filter(({todo_id}) => todo_ids.length === 0 || ids.includes(todo_id));
+        }
+
+        return connectionFromArray(output, args);
       }
     }
   })

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import radium from 'radium';
 
 import Tags from 'containers/TagsContainer';
+import Todo from 'containers/TodoContainer';
 import Timeline from 'containers/TimelineContainer';
 
 import * as style from './style/home';
@@ -19,22 +20,26 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chooseTags: []
+      chooseTags: [],
+      chooseTodo: []
     };
+
     this.modifyChooseTags = this.modifyChooseTags.bind(this);
+    this.modifyChooseTodo = this.modifyChooseTodo.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
       JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data) ||
+      this.props.format !== nextProps.format ||
       JSON.stringify(this.state.chooseTags) !== JSON.stringify(nextState.chooseTags) ||
-      this.props.format !== nextProps.format
+      JSON.stringify(this.state.chooseTodo) !== JSON.stringify(nextState.chooseTodo)
     );
   }
 
   render() {
     const {format, data} = this.props;
-    const {chooseTags} = this.state;
+    const {chooseTags, chooseTodo} = this.state;
 
     return (
       <div>
@@ -48,7 +53,10 @@ export default class Home extends React.Component {
           </div>
 
           <div style={style.col}>
-            todo
+            <Todo todo={data.todo}
+              data={data}
+              modifyChooseTodo={this.modifyChooseTodo}
+            />
           </div>
         </div>
 
@@ -58,6 +66,7 @@ export default class Home extends React.Component {
             data={data}
             chooseTags={chooseTags}
             modifyChooseTags={this.modifyChooseTags}
+            chooseTodo={chooseTodo}
           />
         </div>
       </div>
@@ -66,5 +75,9 @@ export default class Home extends React.Component {
 
   modifyChooseTags(tags) {
     this.setState({chooseTags: tags});
+  }
+
+  modifyChooseTodo(todo, tag) {
+    this.setState({chooseTodo: todo, chooseTags: tag});
   }
 }
