@@ -15,10 +15,6 @@ class Index extends React.Component {
     data: PropTypes.object.isRequired
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
   render() {
     return (
       <div>
@@ -31,10 +27,15 @@ class Index extends React.Component {
 }
 
 /* eslint-disable react/display-name, react/prop-types */
-export default ({radiumConfig, router, ...props}) => (
+export default ({radiumConfig, redux, router, ...props}) => (
   <Wrapper radiumConfig={radiumConfig}
+    redux={redux}
     router={router}
-    modules={{reactRouterDom: require('react-router-dom')}}
+    modules={{
+      redux: require('redux'),
+      reactRedux: require('react-redux'),
+      reactRouterDom: require('react-router-dom')
+    }}
   >
     <Index {...props} />
   </Wrapper>

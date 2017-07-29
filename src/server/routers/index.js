@@ -6,6 +6,8 @@ import process from 'process';
 import Router from 'koa-better-router';
 import React from 'react';
 import reactRender from 'cat-middleware/lib/koa-react-render';
+import {combineReducers} from 'redux';
+import {formReducer} from 'cat-components/lib/input-redux';
 
 import Index from 'components/Index';
 import pages from 'constants/pages';
@@ -27,6 +29,8 @@ const data = {
   email
 };
 
+const reducer = combineReducers(formReducer);
+
 pages.forEach(({path}) => {
   router.get(path, (ctx, next) => reactRender(
     <Index data={data}
@@ -35,6 +39,7 @@ pages.forEach(({path}) => {
         location: ctx.request.url,
         context: {}
       }}
+      redux={{reducer}}
     />, {
       js: 'index',
       ENV,

@@ -46,8 +46,10 @@ class DashboardMenu extends React.Component {
 
           <div style={style.menu.imgBackground}>
             <Img style={[style.menu.imgBackground, style.menu.img]}
+              link='https://github.com/HsuTing/cat-time-tracker'
               src='https://hsuting.github.io/img/icon.svg'
               type='div'
+              target='_blank'
             />
           </div>
 
