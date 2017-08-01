@@ -8,13 +8,17 @@ export default [{
     'isEmpty'
   ])
 }, {
-  name: 'note',
-  rules: getRules([
-    'isEmpty'
-  ])
-}, {
   name: 'tag',
+  title: 'Tag',
   rules: getRules([
     'isEmpty'
-  ])
+  ]),
+  type: 'select'
+}, {
+  name: 'note',
+  title: 'Note',
+  rules: getRules([
+    'isEmpty'
+  ]),
+  type: 'textarea'
 }];

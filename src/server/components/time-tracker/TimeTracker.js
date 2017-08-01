@@ -3,17 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import radium from 'radium';
-import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
-import {inputConnect} from 'cat-components/lib/input-redux';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
 @withRouter
-@inputConnect('time-tracker')()
 @radium
 export default class TimeTracker extends React.Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
     pages: PropTypes.array.isRequired,
-    form: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
   }
 
@@ -24,16 +21,7 @@ export default class TimeTracker extends React.Component {
   }
 
   render() {
-    const {pages, form, data, location} = this.props;
-    const {note, tag} = form || {};
-
-    if(location.pathname !== '/time-tracker/' && !(
-      note && !note.isError &&
-      tag && !tag.isError
-    ))
-      return (
-        <Redirect to='/time-tracker/' />
-      );
+    const {pages, data} = this.props;
 
     return (
       <Switch>
@@ -42,7 +30,9 @@ export default class TimeTracker extends React.Component {
             path={`/time-tracker${path}`}
             exact
             component={() => (
-              <Component data={data} />
+              <Component {...data}
+                data={data}
+              />
             )}
           />
         ))}

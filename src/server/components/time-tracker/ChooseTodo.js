@@ -28,6 +28,7 @@ export default class ChooseTodo extends React.Component {
       todo: {}
     };
 
+    this.nextPage = this.nextPage.bind(this);
     this.modifyChooseTodo = this.modifyChooseTodo.bind(this);
   }
 
@@ -39,7 +40,7 @@ export default class ChooseTodo extends React.Component {
   }
 
   render() {
-    const {form, data, submitDispatch} = this.props;
+    const {form, data} = this.props;
     const {id, tag} = form || {};
     let nextPage = '/timer/';
     if(tag && tag.value === 'custom')
@@ -56,11 +57,21 @@ export default class ChooseTodo extends React.Component {
 
         <div style={style.buttonRoot}>
           <Link to={`/time-tracker${nextPage}`}>
-            <Button onClick={() => submitDispatch(() => {})}>next</Button>
+            <Button onClick={this.nextPage}>next</Button>
           </Link>
         </div>
       </div>
     );
+  }
+
+  nextPage() {
+    const {form, submitDispatch} = this.props;
+    const {tag} = form || {};
+
+    if(tag && tag.value === 'custom')
+      return;
+
+    submitDispatch(() => {});
   }
 
   modifyChooseTodo(todo) {

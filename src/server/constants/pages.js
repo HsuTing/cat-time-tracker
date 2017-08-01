@@ -4,7 +4,7 @@ import HomeContainer from 'containers/HomeContainer';
 
 import TimeTrackerContainer from 'containers/TimeTrackerContainer';
 import TimeTrackerChooseTodo from 'componentsTimeTracker/ChooseTodo';
-import TimeTrackerCustom from 'componentsTimeTracker/Custom';
+import TimeTrackerCustomContainer from 'containers/TimeTrackerCustomContainer';
 import TimeTrackerTimer from 'componentsTimeTracker/Timer';
 
 export default [{
@@ -22,7 +22,7 @@ export default [{
   }, {
     title: 'Custom',
     path: '/custom/',
-    Component: TimeTrackerCustom
+    Component: TimeTrackerCustomContainer
   }, {
     title: 'Timer',
     path: '/timer/',

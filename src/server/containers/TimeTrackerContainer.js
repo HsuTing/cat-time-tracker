@@ -20,6 +20,7 @@ export default (preProps) => (
         }
         setting {
           ...TagsContainer_setting
+          ...TimeTrackerCustomContainer_setting
         }
       }
     `}
