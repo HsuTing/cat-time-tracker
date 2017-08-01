@@ -7,13 +7,19 @@ import {formReducer} from 'cat-components/lib/input-redux';
 
 import Index from 'components/Index';
 
-const reducer = combineReducers(formReducer);
+const redux = {};
+redux.reducer = combineReducers(formReducer);
+
+if(process.env.NODE_ENV !== 'production') {
+  const {createLogger} = require('redux-logger');
+  redux.enhancer = createLogger({collapsed: true});
+}
 
 (() => {
   ReactDOM.render(
     <Index data={data}
       router={{isServer: false}}
-      redux={{reducer}}
+      redux={redux}
     />,
     document.getElementById('root')
   );

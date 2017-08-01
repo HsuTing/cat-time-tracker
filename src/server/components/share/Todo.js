@@ -22,17 +22,29 @@ export default class Todo extends React.Component {
       })
     }).isRequired,
     data: PropTypes.object.isRequired,
-    modifyChooseTodo: PropTypes.func.isRequired
+    modifyChooseTodo: PropTypes.func.isRequired,
+    getTodo: PropTypes.func,
+    todoId: PropTypes.string
+  }
+
+  static defaultProps = {
+    getTodo: () => {}
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      chooseId: null,
+      chooseId: props.todoId ? props.todoId : null,
       chooseTag: []
     };
 
     this.chooseTodo = this.chooseTodo.bind(this);
+  }
+
+  componentDidMount() {
+    const {getTodo, todo} = this.props;
+
+    getTodo(todo.todoGroup.edges.map(({node}) => node));
   }
 
   shouldComponentUpdate(nextProps, nextState) {

@@ -20,7 +20,8 @@
         "routers": "server/routers",
         "schemas": "server/schemas",
         "db": "firebase",
-        "constants": "server/constants"
+        "constants": "server/constants",
+        "fields": "server/constants/fields"
       }
     }]
   ]

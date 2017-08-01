@@ -7,7 +7,7 @@ import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import {inputConnect} from 'cat-components/lib/input-redux';
 
 @withRouter
-@inputConnect('timeTracker')()
+@inputConnect('time-tracker')()
 @radium
 export default class TimeTracker extends React.Component {
   static propTypes = {
@@ -25,10 +25,12 @@ export default class TimeTracker extends React.Component {
 
   render() {
     const {pages, form, data, location} = this.props;
+    const {note, tag} = form || {};
 
-    if(!(form.note && !form.note.isError &&
-      form.tag && !form.tag.isError) &&
-      location.pathname !== '/time-tracker/')
+    if(location.pathname !== '/time-tracker/' && !(
+      note && !note.isError &&
+      tag && !tag.isError
+    ))
       return (
         <Redirect to='/time-tracker/' />
       );
