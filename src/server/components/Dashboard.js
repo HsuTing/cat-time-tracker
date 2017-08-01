@@ -58,10 +58,10 @@ class DashboardMenu extends React.Component {
         </div>
 
         <div style={style.menu.linkRoot}>
-          {pages.map(({title, path}, index) => (
+          {pages.map(({title, path, pages}, index) => (
             <Route key={index}
               path={path}
-              exact
+              exact={Boolean(!pages)}
             >
               {buttons(path, title, hide)}
             </Route>
@@ -99,10 +99,10 @@ class Dashboard extends React.Component {
 
         <div>
           <Switch>
-            {pages.map(({title, path, Component}, index) => (
+            {pages.map(({title, path, Component, pages}, index) => (
               <Route key={index}
                 path={path}
-                exact
+                exact={Boolean(!pages)}
                 component={() => (
                   <div>
                     <header style={style.header}>
@@ -116,7 +116,7 @@ class Dashboard extends React.Component {
                     </header>
 
                     <div style={style.content}>
-                      <Component />
+                      <Component pages={pages} />
                     </div>
                   </div>
                 )}

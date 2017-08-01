@@ -15,6 +15,7 @@
         "public": "server/public",
         "components": "server/components",
         "componentsShare": "server/components/share",
+        "componentsTimeTracker": "server/components/time-tracker",
         "containers": "server/containers",
         "routers": "server/routers",
         "schemas": "server/schemas",

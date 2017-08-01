@@ -1,7 +1,9 @@
 'use strict';
 
 import HomeContainer from 'containers/HomeContainer';
-import TimeTracker from 'components/TimeTracker';
+
+import TimeTrackerContainer from 'containers/TimeTrackerContainer';
+import TimeTrackerTimer from 'componentsTimeTracker/Timer';
 
 export default [{
   title: 'Home',
@@ -10,5 +12,14 @@ export default [{
 }, {
   title: 'Time tracker',
   path: '/time-tracker/',
-  Component: TimeTracker
+  Component: TimeTrackerContainer,
+  pages: [{
+    title: 'Add',
+    path: '/',
+    Component: TimeTrackerTimer
+  }, {
+    title: 'Timer',
+    path: '/timer/',
+    Component: TimeTrackerTimer
+  }]
 }];

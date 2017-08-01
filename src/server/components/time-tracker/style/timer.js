@@ -4,11 +4,6 @@ import radium from 'radium';
 import * as grey from 'cat-components/lib/color/grey';
 
 export const root = {
-  display: 'grid',
-  gridTemplateColumns: 'auto 220px auto'
-};
-
-export const timerRoot = {
   position: 'relative',
   cursor: 'pointer'
 };

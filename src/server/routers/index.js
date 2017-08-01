@@ -31,21 +31,31 @@ const data = {
 
 const reducer = combineReducers(formReducer);
 
-pages.forEach(({path}) => {
-  router.get(path, (ctx, next) => reactRender(
-    <Index data={data}
-      router={{
-        isServer: true,
-        location: ctx.request.url,
-        context: {}
-      }}
-      redux={{reducer}}
-    />, {
-      js: 'index',
-      ENV,
-      data: JSON.stringify(data)
-    }
-  )(ctx, next))
-});
+const renderPages = (parentPages, prefix = '/') => {
+  const childRouter = Router({prefix});
+
+  parentPages.forEach(({pages, path}) => {
+    if(!pages)
+      return childRouter.get(path, (ctx, next) => reactRender(
+        <Index data={data}
+          router={{
+            isServer: true,
+            location: ctx.request.url,
+            context: {}
+          }}
+          redux={{reducer}}
+        />, {
+          js: 'index',
+          ENV,
+          data: JSON.stringify(data)
+        }
+      )(ctx, next));
+
+    return renderPages(pages, path.slice(0, -1));
+  });
+
+  router.addRoutes(childRouter.getRoutes());
+};
+renderPages(pages);
 
 export default router;
