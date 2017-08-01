@@ -2,38 +2,49 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import radium, {StyleRoot} from 'radium';
-import {Route, Switch} from 'react-router-dom';
+import radium from 'radium';
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
+import {inputConnect} from 'cat-components/lib/input-redux';
 
-import * as style from './style/timeTracker';
-
+@withRouter
+@inputConnect('timeTracker')()
 @radium
 export default class TimeTracker extends React.Component {
   static propTypes = {
-    pages: PropTypes.array.isRequired
+    location: PropTypes.object.isRequired,
+    pages: PropTypes.array.isRequired,
+    form: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      JSON.stringify(this.props.location) !== JSON.stringify(nextProps.location)
+    );
   }
 
   render() {
-    const {pages} = this.props;
+    const {pages, form, data, location} = this.props;
+
+    if(!(form.note && !form.note.isError &&
+      form.tag && !form.tag.isError) &&
+      location.pathname !== '/time-tracker/')
+      return (
+        <Redirect to='/time-tracker/' />
+      );
 
     return (
-      <StyleRoot style={style.root}>
-        <div />
-
-        <Switch>
-          {pages.map(({path, Component}, index) => (
-            <Route key={index}
-              path={`/time-tracker${path}`}
-              exact
-              component={() => (
-                <Component />
-              )}
-            />
-          ))}
-        </Switch>
-
-        <div />
-      </StyleRoot>
+      <Switch>
+        {pages.map(({path, Component}, index) => (
+          <Route key={index}
+            path={`/time-tracker${path}`}
+            exact
+            component={() => (
+              <Component data={data} />
+            )}
+          />
+        ))}
+      </Switch>
     );
   }
 }

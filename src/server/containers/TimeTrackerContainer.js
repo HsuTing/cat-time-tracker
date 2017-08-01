@@ -15,20 +15,23 @@ export default (preProps) => (
   <QueryRenderer environment={environment}
     query={graphql.experimental`
       query TimeTrackerContainerQuery {
+        todo {
+          ...TodoContainer_todo
+        }
         setting {
-          id
+          ...TagsContainer_setting
         }
       }
     `}
-    variables={{
-    }}
     render={({error, props}) => {
       if(error)
         return <div>{error.message}</div>;
       /* eslint-disable react/prop-types */
       else if(props) {
         return (
-          <TimeTracker {...preProps} />
+          <TimeTracker {...preProps}
+            data={props}
+          />
         );
       }
       /* eslint-enable react/prop-types */

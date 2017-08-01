@@ -3,6 +3,7 @@
 import HomeContainer from 'containers/HomeContainer';
 
 import TimeTrackerContainer from 'containers/TimeTrackerContainer';
+import TimeTrackerChooseTodo from 'componentsTimeTracker/ChooseTodo';
 import TimeTrackerTimer from 'componentsTimeTracker/Timer';
 
 export default [{
@@ -16,7 +17,7 @@ export default [{
   pages: [{
     title: 'Add',
     path: '/',
-    Component: TimeTrackerTimer
+    Component: TimeTrackerChooseTodo
   }, {
     title: 'Timer',
     path: '/timer/',

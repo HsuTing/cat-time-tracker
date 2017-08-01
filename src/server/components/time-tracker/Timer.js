@@ -28,8 +28,10 @@ export default class Timer extends React.Component {
     const {hours, minutes, seconds} = timer;
 
     return (
-      <StyleRoot>
-        <div style={style.root}
+      <StyleRoot style={style.root}>
+        <div />
+
+        <div style={style.timerRoot}
           onClick={() => !isRunning ? timerStart() : timerReset()}
         >
           <div style={style.circle} />
@@ -46,6 +48,8 @@ export default class Timer extends React.Component {
             {`${hours} hr ${minutes} min ${seconds} sec`}
           </div>
         </div>
+
+        <div />
       </StyleRoot>
     );
   }
