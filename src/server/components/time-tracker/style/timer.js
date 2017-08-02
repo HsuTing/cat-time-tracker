@@ -10,6 +10,8 @@ export const root = {
 
 export const timerRoot = {
   position: 'relative',
+  width: '220px',
+  height: '220px',
   cursor: 'pointer'
 };
 
@@ -38,3 +40,16 @@ export const timer = isRunning => ({
     '100%': {color: isRunning ? grey._800_ : grey._200_}
   })
 });
+
+export const content = {
+  root: {
+    margin: '50px 0px 0px',
+    padding: '25px 0px 0px',
+    borderTop: `1px solid ${grey._200_}`,
+    fontSize: '12px'
+  },
+
+  tag: {
+    fontSize: '15px'
+  }
+};

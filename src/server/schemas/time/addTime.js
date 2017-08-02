@@ -5,10 +5,13 @@ import {
   GraphQLBoolean,
   GraphQLString
 } from 'graphql';
-import {mutationWithClientMutationId} from 'graphql-relay';
+import {
+  mutationWithClientMutationId,
+  fromGlobalId
+} from 'graphql-relay';
 
 import {newTimeTracker} from 'db/set';
-import {checkTime} from 'utils/time';
+import checkTime from 'db/checkTime';
 
 export default mutationWithClientMutationId({
   name: 'Time',
@@ -42,9 +45,14 @@ export default mutationWithClientMutationId({
     }
   },
   mutateAndGetPayload: async (args, {name}) => {
-    if(await checkTime(name, args))
+    const data = {
+      ...args,
+      id: fromGlobalId(args.id).id
+    };
+
+    if(await checkTime(name, data))
       return {
-        status: (await newTimeTracker(name, args))
+        status: (await newTimeTracker(name, data))
       };
 
     return {
