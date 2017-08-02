@@ -20,7 +20,7 @@ export const newTimeTracker = async (name, {
     end
   });
 
-  return true;
+  return id;
 };
 
 export const todo = async (name, {

@@ -1,7 +1,7 @@
 'use strict';
 
 import time from './getTime';
-import modifyTime from './modifyTime';
+import addTime from './addTime';
 
 export default {
   query: {
@@ -9,6 +9,6 @@ export default {
   },
 
   mutation: {
-    modifyTime
+    addTime
   }
 };
