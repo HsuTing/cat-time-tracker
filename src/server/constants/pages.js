@@ -7,6 +7,8 @@ import TimeTrackerChooseTodo from 'componentsTimeTracker/ChooseTodo';
 import TimeTrackerCustomContainer from 'containers/TimeTrackerCustomContainer';
 import TimeTrackerTimer from 'componentsTimeTracker/Timer';
 
+import ModifyTodoContainer from 'containers/ModifyTodoContainer';
+
 export default [{
   title: 'Home',
   path: '/',
@@ -28,4 +30,8 @@ export default [{
     path: '/timer/',
     Component: TimeTrackerTimer
   }]
+}, {
+  title: 'Todo',
+  path: '/todo/',
+  Component: ModifyTodoContainer
 }];

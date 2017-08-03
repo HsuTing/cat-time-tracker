@@ -7,20 +7,28 @@ import {
 } from 'react-relay';
 import Loading from 'cat-components/lib/loading';
 
-import TimeTracker from 'componentsTimeTracker/TimeTracker';
+import ModifyTodo from 'components/ModifyTodo';
 import environment from 'utils/environment';
 
 /* eslint-disable react/display-name */
-export default (preProps) => (
+export default () => (
   <QueryRenderer environment={environment}
     query={graphql.experimental`
-      query TimeTrackerContainerQuery {
+      query ModifyTodoContainerQuery {
         todo {
-          ...TodoContainer_todo
+          todoGroup {
+            edges {
+              node {
+                id
+                tag
+                note
+                status
+              }
+            }
+          }
         }
         setting {
           ...TagsContainer_setting
-          ...TimeTrackerCustomContainer_setting
         }
       }
     `}
@@ -30,7 +38,7 @@ export default (preProps) => (
       /* eslint-disable react/prop-types */
       else if(props)
         return (
-          <TimeTracker {...preProps}
+          <ModifyTodo todo={props.todo.todoGroup.edges.map(({node}) => node)}
             data={props}
           />
         );
