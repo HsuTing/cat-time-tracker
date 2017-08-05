@@ -61,7 +61,9 @@ export const todoGroupType = new GraphQLObjectType({
         let output = data || [];
 
         if(status)
-          output = [...output].filter(data => status.length === 0 || status.includes(data.status));
+          output = [...output].filter(data => {
+            return status.length === 0 || [...status].concat('').includes(data.status)
+          });
 
         return connectionFromArray(output, args);
       }
