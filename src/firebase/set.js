@@ -39,6 +39,16 @@ export const todo = async (name, {
   return true;
 };
 
+export const toggleTodo = async (name, {
+  id,
+  status
+}) => {
+  await firebase.database().ref(`/projects/${name}/todo/${id}`)
+    .update({status});
+
+  return true;
+};
+
 export const done = async (name, {
   id
 }) => {

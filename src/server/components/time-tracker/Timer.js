@@ -20,7 +20,7 @@ import * as style from './style/timer';
 
 const mutation = graphql`
   mutation TimerMutation(
-    $input: TimeInput!
+    $input: AddTimeInput!
   ) {
     addTime(input: $input) {
       status
@@ -134,7 +134,7 @@ export default class Timer extends React.Component {
           if(response.addTime.status) {
             timerReset();
             this.setState({time: null});
-            return
+            return;
           }
 
           alert('Server error');

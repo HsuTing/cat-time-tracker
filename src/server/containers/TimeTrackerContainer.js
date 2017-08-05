@@ -16,7 +16,7 @@ export default (preProps) => (
     query={graphql.experimental`
       query TimeTrackerContainerQuery {
         todo {
-          ...TodoContainer_todo
+          ...TodoNotDoneContainer_todo
         }
         setting {
           ...TagsContainer_setting

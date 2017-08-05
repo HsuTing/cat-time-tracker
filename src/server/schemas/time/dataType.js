@@ -21,7 +21,7 @@ const dataType = new GraphQLObjectType({
   name: 'Time',
   description: 'This is the type of the Time.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('Time'),
     todo_id: {
       type: GraphQLString,
@@ -43,7 +43,7 @@ const dataType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'This is the end time of the Time.'
     }
-  })
+  }
 });
 
 const {connectionType: timeConnection} =
@@ -54,7 +54,7 @@ export const timeGroupType = new GraphQLObjectType({
   name: 'TimeGroup',
   description: 'This is the type of the Time group.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('TimeGroup'),
     timeGroup: {
       type: timeConnection,
@@ -85,5 +85,5 @@ export const timeGroupType = new GraphQLObjectType({
         return connectionFromArray(output, args);
       }
     }
-  })
+  }
 });

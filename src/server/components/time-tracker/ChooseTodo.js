@@ -7,7 +7,7 @@ import Link from 'cat-components/lib/link';
 import Button from 'cat-components/lib/button';
 import {inputConnect, inputCheck} from 'cat-components/lib/input-redux';
 
-import TodoContainer from 'containers/TodoContainer';
+import TodoContainer from 'containers/TodoNotDoneContainer';
 import fields from 'fields/timeTracker';
 
 import * as style from './style/chooseTodo';

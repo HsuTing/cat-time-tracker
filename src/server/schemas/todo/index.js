@@ -1,7 +1,7 @@
 'use strict';
 
 import todo from './getTodo';
-import modifyTodo from './modifyTodo';
+import toggleTodo from './toggleTodo';
 
 export default {
   query: {
@@ -9,6 +9,6 @@ export default {
   },
 
   mutation: {
-    modifyTodo
+    toggleTodo
   }
 };

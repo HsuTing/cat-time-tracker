@@ -33,6 +33,15 @@ export const todo = async ({name}, statusArray = ['done']) => {
   })).filter(({status}) => statusArray.includes(status)) : [];
 };
 
+export const todoById = async ({name}, id) => {
+  const snapshot = await firebase.database().ref(`/projects/${name}/todo/${id}/`).once('value');
+
+  return {
+    id,
+    ...snapshot.val()
+  };
+};
+
 export const time = async ({name}) => {
   const snapshot = await firebase.database().ref(`/projects/${name}/time/`).once('value');
   const value = snapshot.val();

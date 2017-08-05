@@ -15,7 +15,7 @@ export default new GraphQLObjectType({
   name: 'Setting',
   description: 'This is the type of the Setting.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('Setting'),
     format: {
       type: GraphQLString,
@@ -29,5 +29,5 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       description: 'This is the time color in the Setting.'
     }
-  })
+  }
 });

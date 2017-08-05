@@ -20,7 +20,7 @@ const dataType = new GraphQLObjectType({
   name: 'Todo',
   description: 'This is the type of the Todo.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('Todo'),
     note: {
       type: GraphQLString,
@@ -34,7 +34,7 @@ const dataType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'This is the tag of the Todo.'
     }
-  })
+  }
 });
 
 const {connectionType: todoConnection} =
@@ -45,7 +45,7 @@ export const todoGroupType = new GraphQLObjectType({
   name: 'TodoGroup',
   description: 'This is the type of the Todo group.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('TodoGroup'),
     todoGroup: {
       type: todoConnection,
@@ -66,5 +66,5 @@ export const todoGroupType = new GraphQLObjectType({
         return connectionFromArray(output, args);
       }
     }
-  })
+  }
 });

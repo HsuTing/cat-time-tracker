@@ -14,7 +14,7 @@ import {newTimeTracker} from 'db/set';
 import checkTime from 'db/checkTime';
 
 export default mutationWithClientMutationId({
-  name: 'Time',
+  name: 'AddTime',
   description: 'Add the data of the Time.',
   inputFields: {
     id: {

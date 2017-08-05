@@ -21,7 +21,7 @@ const dataType = new GraphQLObjectType({
   name: 'Tags',
   description: 'This is the type of the Tags.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('Tags'),
     name: {
       type: GraphQLString,
@@ -32,7 +32,7 @@ const dataType = new GraphQLObjectType({
       description: 'This is the color of the Tags.',
       resolve: ({color}) => ansiHTML(chalk[color]('color')).split(/:|;/)[1]
     }
-  })
+  }
 });
 
 const {connectionType: tagsConnection} =
@@ -43,7 +43,7 @@ export const tagsGroupType = new GraphQLObjectType({
   name: 'TagsGroup',
   description: 'This is the type of the Tags group.',
   interfaces: [nodeInterface],
-  fields: () => ({
+  fields: {
     id: globalIdField('TagsGroup'),
     tagsGroup: {
       type: tagsConnection,
@@ -57,5 +57,5 @@ export const tagsGroupType = new GraphQLObjectType({
         })), args
       )
     }
-  })
+  }
 });
