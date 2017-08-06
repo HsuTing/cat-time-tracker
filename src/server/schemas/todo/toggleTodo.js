@@ -38,7 +38,7 @@ export default mutationWithClientMutationId({
     const todo = await getTodoById({name}, reallyID);
     const newStatus = todo.status === 'done' ? 'not done' : 'done';
 
-    if(await setToggleTodo(name, {id: reallyID, status: newStatus}))
+    if(todo.id && await setToggleTodo(name, {id: reallyID, status: newStatus}))
       return {
         todo: {
           ...todo,

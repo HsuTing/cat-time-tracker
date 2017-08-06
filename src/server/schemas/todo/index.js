@@ -2,6 +2,7 @@
 
 import todo from './getTodo';
 import toggleTodo from './toggleTodo';
+import addTodo from './addTodo';
 
 export default {
   query: {
@@ -9,6 +10,7 @@ export default {
   },
 
   mutation: {
-    toggleTodo
+    toggleTodo,
+    addTodo
   }
 };
