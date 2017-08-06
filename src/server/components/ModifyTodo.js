@@ -2,32 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  commitMutation,
-  graphql
-} from 'react-relay';
 import radium from 'radium';
 import Toggle from 'cat-components/lib/toggle';
 
 import Tags from 'containers/TagsContainer';
-import environment from 'utils/environment';
+import toggleTodo from 'mutations/toggleTodo';
 
 import * as style from './style/modifyTodo';
-
-const mutation = graphql`
-  mutation ModifyTodoMutation(
-    $input: ToggleTodoInput!
-  ) {
-    toggleTodo(input: $input) {
-      todo {
-        id
-        tag
-        note
-        status
-      }
-    }
-  }
-`;
 
 @radium
 export default class ModifyTodo extends React.Component {
@@ -76,19 +57,10 @@ export default class ModifyTodo extends React.Component {
   }
 
   toggleTodo(id) {
-    const variables = {input: {
-      id
-    }};
+    const {todo} = this.props;
 
-    commitMutation(
-      environment, {
-        mutation,
-        variables,
-        onCompleted: response => {
-          console.log(response.toggleTodo.todo);
-        },
-        onError: err => console.error(err)
-      }
-    );
+    toggleTodo({
+      id
+    }, todo);
   }
 }

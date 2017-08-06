@@ -2,10 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  commitMutation,
-  graphql
-} from 'react-relay';
 import radium, {StyleRoot} from 'radium';
 import {Redirect} from 'react-router-dom';
 import moment from 'moment';
@@ -14,19 +10,9 @@ import {inputConnect} from 'cat-components/lib/input-redux';
 import timer from 'cat-components/lib/timer';
 
 import Tags from 'containers/TagsContainer';
-import environment from 'utils/environment';
+import addTimer from 'mutations/addTimer';
 
 import * as style from './style/timer';
-
-const mutation = graphql`
-  mutation TimerMutation(
-    $input: AddTimeInput!
-  ) {
-    addTime(input: $input) {
-      status
-    }
-  }
-`;
 
 @inputConnect('time-tracker')()
 @timer()
@@ -118,29 +104,15 @@ export default class Timer extends React.Component {
     if(!isRunning)
       return;
 
-    const variables = {input: {
+    addTimer({
       id: id.value,
       tag: tag.value,
       note: note.value,
       start: time,
       end: moment().format()
-    }};
-
-    commitMutation(
-      environment, {
-        mutation,
-        variables,
-        onCompleted: response => {
-          if(response.addTime.status) {
-            timerReset();
-            this.setState({time: null});
-            return;
-          }
-
-          alert('Server error');
-        },
-        onError: err => console.error(err)
-      }
-    );
+    }, () => {
+      timerReset();
+      this.setState({time: null});
+    });
   }
 }

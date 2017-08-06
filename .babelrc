@@ -21,7 +21,8 @@
         "schemas": "server/schemas",
         "db": "firebase",
         "constants": "server/constants",
-        "fields": "server/constants/fields"
+        "fields": "server/constants/fields",
+        "mutations": "server/mutations"
       }
     }]
   ]
