@@ -7,7 +7,7 @@ import {
 } from 'react-relay';
 import Loading from 'cat-components/lib/loading';
 
-import ModifyTodo from 'components/ModifyTodo';
+import ModifyTodo from 'componentsModifyTodo/ModifyTodo';
 import environment from 'utils/environment';
 
 /* eslint-disable react/display-name */
@@ -29,6 +29,7 @@ export default () => (
         }
         setting {
           ...TagsContainer_setting
+          ...AddTodoContainer_setting
         }
       }
     `}

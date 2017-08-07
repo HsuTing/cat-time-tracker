@@ -2,17 +2,19 @@
 
 import {
   GraphQLNonNull,
-  GraphQLString,
-  GraphQLBoolean
+  GraphQLString
 } from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
 
 import {
+  todo as getTodo,
   setting as getSetting,
 } from 'db/get';
 import {
   todo as setTodo
 } from 'db/set';
+
+import {todoGroupType} from './dataType';
 
 export default mutationWithClientMutationId({
   name: 'AddTodo',
@@ -28,9 +30,9 @@ export default mutationWithClientMutationId({
     }
   },
   outputFields: {
-    status: {
-      description: 'Use to check if adding the Todo successes.',
-      type: GraphQLBoolean
+    todo: {
+      description: 'New todo',
+      type: todoGroupType
     }
   },
   mutateAndGetPayload: async ({tag, note}, {name}) => {
@@ -38,11 +40,18 @@ export default mutationWithClientMutationId({
 
     if(tags[tag] && await setTodo(name, {tag, note}))
       return {
-        status: true
+        todo: [{
+          id: 'custom',
+          status: '',
+          tag: '',
+          note: 'custom todo'
+        }].concat(await getTodo({name}, ['done', 'not done']))
       };
 
     return {
-      status: false
+      todo: {
+        status: false
+      }
     };
   }
 });

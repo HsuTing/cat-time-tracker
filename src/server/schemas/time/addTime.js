@@ -9,7 +9,9 @@ import {
   mutationWithClientMutationId,
   fromGlobalId
 } from 'graphql-relay';
+import {inputCheck} from 'cat-components/lib/input-redux';
 
+import timeTracker from 'fields/timeTracker';
 import {newTimeTracker} from 'db/set';
 import checkTime from 'db/checkTime';
 
@@ -50,7 +52,13 @@ export default mutationWithClientMutationId({
       id: fromGlobalId(args.id).id
     };
 
-    if(await checkTime(name, data))
+    const check = timeTracker.map(({name, rules}, index) => {
+      return inputCheck(args[name], rules);
+    }).reduce((nowCheck, {isError}) => {
+      return nowCheck || isError;
+    }, false);
+
+    if(!check && await checkTime(name, data))
       return {
         status: (await newTimeTracker(name, data))
       };

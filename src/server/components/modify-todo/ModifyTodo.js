@@ -6,6 +6,7 @@ import radium from 'radium';
 import Toggle from 'cat-components/lib/toggle';
 
 import Tags from 'containers/TagsContainer';
+import AddTodo from 'containers/AddTodoContainer';
 import toggleTodo from 'mutations/toggleTodo';
 
 import * as style from './style/modifyTodo';
@@ -34,6 +35,8 @@ export default class ModifyTodo extends React.Component {
 
     return (
       <div>
+        <AddTodo setting={data.setting} />
+
         {todo.slice(1).map(({id, note, status, tag}, index) => (
           <div key={index}
             style={style.root}

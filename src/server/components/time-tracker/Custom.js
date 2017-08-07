@@ -10,6 +10,7 @@ import Button from 'cat-components/lib/button';
 
 import InputSelect from 'componentsShare/InputSelect';
 import fields from 'fields/timeTracker';
+import {input as inputStyle} from 'componentsShare/style/style';
 
 import * as style from './style/custom';
 
@@ -76,7 +77,7 @@ export default class Custom extends React.Component {
 
                     default:
                       return (
-                        <Input style={style.input}
+                        <Input style={inputStyle}
                           value={value === undefined ? '' : value}
                           onChange={data => inputDispatch(name, data)}
                           rules={rules}

@@ -30,7 +30,8 @@ export const todo = async ({name}, statusArray = ['done']) => {
   return value ? Object.keys(value).map(key => ({
     id: key,
     ...value[key]
-  })).filter(({status}) => statusArray.includes(status)) : [];
+  })).filter(({status}) => statusArray.includes(status))
+    .reverse() : [];
 };
 
 export const todoById = async ({name}, id) => {

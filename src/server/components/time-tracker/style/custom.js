@@ -13,10 +13,6 @@ export const title = {
   fontSize: '20px'
 };
 
-export const input = {
-  borderRadius: '0px'
-};
-
 export const error = {
   margin: '5px 0px 0px',
   fontSize: '12px',

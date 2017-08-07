@@ -41,9 +41,7 @@ export default (input, todo) => {
         input
       },
       optimisticResponse,
-      onCompleted: response => {
-        console.log(response.toggleTodo.todo);
-      },
+      onCompleted: () => {},
       onError: err => console.error(err)
     }
   );
