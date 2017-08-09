@@ -17,12 +17,10 @@ import fields from 'schemas/fields';
 
 const {nodeInterface} = fields;
 
-const dataType = new GraphQLObjectType({
+export const dataFields = {
   name: 'Tags',
   description: 'This is the type of the Tags.',
-  interfaces: [nodeInterface],
   fields: {
-    id: globalIdField('Tags'),
     name: {
       type: GraphQLString,
       description: 'This is the name of the Tags.'
@@ -32,6 +30,15 @@ const dataType = new GraphQLObjectType({
       description: 'This is the color of the Tags.',
       resolve: ({color}) => ansiHTML(chalk[color]('color')).split(/:|;/)[1]
     }
+  }
+};
+
+const dataType = new GraphQLObjectType({
+  ...dataFields,
+  interfaces: [nodeInterface],
+  fields: {
+    ...dataFields.fields,
+    id: globalIdField('Tags')
   }
 });
 

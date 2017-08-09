@@ -43,7 +43,9 @@ export default class ChooseTodo extends React.Component {
     const {form, data} = this.props;
     const {id, tag} = form || {};
     let nextPage = '/timer/';
-    if(tag && tag.value === 'custom')
+    if((tag && tag.value === 'custom') ||
+      id && id.value && tag && tag.value === ''
+    )
       nextPage = '/custom/';
 
     return (

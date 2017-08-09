@@ -11,12 +11,10 @@ import {tagsGroupType} from 'schemas/tags/dataType';
 
 const {nodeInterface} = fields;
 
-export default new GraphQLObjectType({
+export const dataFields = {
   name: 'Setting',
   description: 'This is the type of the Setting.',
-  interfaces: [nodeInterface],
   fields: {
-    id: globalIdField('Setting'),
     format: {
       type: GraphQLString,
       description: 'This is the format in the Setting.'
@@ -29,5 +27,14 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       description: 'This is the time color in the Setting.'
     }
+  }
+};
+
+export default new GraphQLObjectType({
+  ...dataFields,
+  interfaces: [nodeInterface],
+  fields: {
+    ...dataFields.fields,
+    id: globalIdField('Setting')
   }
 });

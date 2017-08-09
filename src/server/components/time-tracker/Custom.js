@@ -10,7 +10,11 @@ import Button from 'cat-components/lib/button';
 
 import InputSelect from 'componentsShare/InputSelect';
 import fields from 'fields/timeTracker';
-import {input as inputStyle} from 'componentsShare/style/style';
+import {
+  inputTitle as inputTitleStyle,
+  input as inputStyle,
+  inputError as inputErrorStyle
+} from 'componentsShare/style/style';
 
 import * as style from './style/custom';
 
@@ -60,8 +64,7 @@ export default class Custom extends React.Component {
               <div key={index}
                 style={style.root}
               >
-                <h1 style={style.title}
-                >{title}</h1>
+                <h1 style={inputTitleStyle}>{title}</h1>
 
                 {(() => {
                   switch(type) {
@@ -90,7 +93,7 @@ export default class Custom extends React.Component {
                 {
                   !isError ?
                     null :
-                    <p style={style.error}>{error.join(', ')}</p>
+                    <p style={inputErrorStyle}>{error.join(', ')}</p>
                 }
               </div>
             );

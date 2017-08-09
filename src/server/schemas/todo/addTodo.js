@@ -1,10 +1,7 @@
 'use strict';
 
-import {
-  GraphQLNonNull,
-  GraphQLString
-} from 'graphql';
 import {mutationWithClientMutationId} from 'graphql-relay';
+import {addNonNull} from 'cat-graphql/lib/utils';
 
 import {
   todo as getTodo,
@@ -14,21 +11,17 @@ import {
   todo as setTodo
 } from 'db/set';
 
-import {todoGroupType} from './dataType';
+import {dataFields, todoGroupType} from './dataType';
+
+const {tag, note} = dataFields.fields;
 
 export default mutationWithClientMutationId({
   name: 'AddTodo',
   description: 'Add the Todo.',
-  inputFields: {
-    tag: {
-      description: 'This is the tag of the Todo.',
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    note: {
-      description: 'This is the note of the Todo.',
-      type: new GraphQLNonNull(GraphQLString)
-    }
-  },
+  inputFields: addNonNull({
+    tag,
+    note
+  }),
   outputFields: {
     todo: {
       description: 'New todo',

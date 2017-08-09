@@ -1,45 +1,32 @@
 'use strict';
 
 import {
-  GraphQLNonNull,
-  GraphQLBoolean,
-  GraphQLString
+  GraphQLBoolean
 } from 'graphql';
 import {
   mutationWithClientMutationId,
   fromGlobalId
 } from 'graphql-relay';
 import {inputCheck} from 'cat-components/lib/input-redux';
+import {addNonNull} from 'cat-graphql/lib/utils';
 
 import timeTracker from 'fields/timeTracker';
 import {newTimeTracker} from 'db/set';
 import checkTime from 'db/checkTime';
 
+import {dataFields} from './dataType';
+
+const {todo_id, ...fields} = dataFields.fields;
+
 export default mutationWithClientMutationId({
   name: 'AddTime',
   description: 'Add the data of the Time.',
-  inputFields: {
+  inputFields: addNonNull({
+    ...fields,
     id: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'This is the id of the Time.'
-    },
-    tag: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'This is the tag of the Time.'
-    },
-    note: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'This is the note of the Time.'
-    },
-    start: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'This is the start time of the Time.'
-    },
-    end: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'This is the end time of the Time.'
+      ...todo_id
     }
-  },
+  }),
   outputFields: {
     status: {
       description: 'Use to check if adding the Time successes.',

@@ -17,6 +17,7 @@
         "componentsShare": "server/components/share",
         "componentsTimeTracker": "server/components/time-tracker",
         "componentsModifyTodo": "server/components/modify-todo",
+        "componentsSetting": "server/components/setting",
         "containers": "server/containers",
         "routers": "server/routers",
         "schemas": "server/schemas",

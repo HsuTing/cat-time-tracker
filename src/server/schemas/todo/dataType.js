@@ -16,12 +16,10 @@ import fields from 'schemas/fields';
 
 const {nodeInterface} = fields;
 
-const dataType = new GraphQLObjectType({
+export const dataFields = {
   name: 'Todo',
   description: 'This is the type of the Todo.',
-  interfaces: [nodeInterface],
   fields: {
-    id: globalIdField('Todo'),
     note: {
       type: GraphQLString,
       description: 'This is the note of the Todo.'
@@ -34,6 +32,15 @@ const dataType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'This is the tag of the Todo.'
     }
+  }
+};
+
+const dataType = new GraphQLObjectType({
+  ...dataFields,
+  interfaces: [nodeInterface],
+  fields: {
+    ...dataFields.fields,
+    id: globalIdField('Todo')
   }
 });
 

@@ -69,7 +69,7 @@
     "ansi-html": "^0.0.7",
     "babel-polyfill": "^6.23.0",
     "cat-components": "^1.6.11",
-    "cat-graphql": "^0.1.2",
+    "cat-graphql": "^0.1.3",
     "cat-middleware": "^0.2.2",
     "chalk": "^2.0.1",
     "d3": "^4.10.0",
