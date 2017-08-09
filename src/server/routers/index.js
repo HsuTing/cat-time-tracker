@@ -45,6 +45,7 @@ const renderPages = (parentPages, prefix = '/') => {
           }}
           redux={{reducer}}
         />, {
+          root: path.resolve(__dirname, './../../../views'),
           js: 'index',
           ENV,
           data: JSON.stringify(data)
