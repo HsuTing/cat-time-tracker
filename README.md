@@ -2,20 +2,28 @@
 Time tracker
 
 ## Getting Started
-Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-installed [npm](https://www.npmjs.com/) and [node.js](https://nodejs.org/)).
-
 ```sh
-yarn install && yarn build
+npm install cat-time-tracker -g
 ```
+You need to have a json file `.time-tracker.json` in the root folder.
 
 ## Usage
-- `build`: Build the project. Use this script before you start to write the project.
-- `production`: Set `NODE_ENV=production` and build the project. Use this script when you need to make a production version.
-- `watch`: Watch all files. Use this script when you are developing.
-- `start`: Run the prodiction version server.
-- `test-server`: Run the test server with `nodemon`.
-- `test`: Run the test.
-- You can see other scripts in [package.json](./package.json).
+```sh
+// use time tracker
+time-tracker
+
+// set the default ".time-tracker.json"
+time-tracker init
+
+// add todo
+time-tracker todo
+
+// done todo
+time-tracker done
+
+// open a server
+time-tracker start
+```
 
 ## License
 MIT © [HsuTing](http://hsuting.com)

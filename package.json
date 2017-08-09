@@ -15,8 +15,11 @@
     "prod": "export NODE_ENV=production && yarn graphql && yarn relay && yarn babel && yarn webpack",
     "watch": "concurrently -c green \"yarn lint:watch\" \"yarn babel:watch\" \"yarn webpack-server\" \"yarn relay:watch\""
   },
+  "bin": {
+    "time-tracker": "./lib/index.js"
+  },
   "name": "cat-time-tracker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Time tracker",
   "author": {
     "name": "HsuTing",
