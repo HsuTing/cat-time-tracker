@@ -7,7 +7,7 @@
     "babel": "rm -rf ./lib && babel src --out-dir lib",
     "babel:watch": "rm -rf ./lib && babel -w src --out-dir lib",
     "prepublish": "yarn babel",
-    "test-server": "nodemon ./lib/index.js start",
+    "test-server": "export NODE_ENV=test && nodemon ./lib/index.js start",
     "graphql": "babel src/server/schemas --out-dir lib/server/schemas && build-graphql --schema ./lib/server/schemas/schema.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "relay:watch": "relay-compiler --src ./src --schema ./schema.graphql --watch",
@@ -19,7 +19,7 @@
     "time-tracker": "./lib/index.js"
   },
   "name": "cat-time-tracker",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Time tracker",
   "author": {
     "name": "HsuTing",

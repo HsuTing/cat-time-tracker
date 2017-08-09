@@ -13,7 +13,7 @@ import schema from 'schemas/schema';
 import getPkg from './../getPkg';
 
 const app = new Koa();
-const root = path.resolve(__dirname, './../');
+const root = path.resolve(__dirname, './../../');
 
 export default (env, func = () => {}) => {
   func(app);

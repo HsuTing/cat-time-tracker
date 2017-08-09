@@ -8,3 +8,4 @@ lib
 .time-tracker.json
 schema.graphql
 __generated__
+public
