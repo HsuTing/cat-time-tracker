@@ -9,8 +9,6 @@ import TimeTrackerTimer from 'componentsTimeTracker/Timer';
 
 import ModifyTodoContainer from 'containers/ModifyTodoContainer';
 
-import SettingContainer from 'containers/SettingContainer';
-
 export default [{
   title: 'Home',
   path: '/',
@@ -36,8 +34,4 @@ export default [{
   title: 'Todo',
   path: '/todo/',
   Component: ModifyTodoContainer
-}, {
-  title: 'Setting',
-  path: '/Setting',
-  Component: SettingContainer
 }];

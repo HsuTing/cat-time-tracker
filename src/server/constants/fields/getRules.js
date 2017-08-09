@@ -3,6 +3,6 @@
 export default (ruleNames = []) => ruleNames.map(ruleName => ({
   isEmpty: {
     validator: 'isEmpty',
-    message: '不能空白'
+    message: 'Can not be empty'
   }
 }[ruleName]))

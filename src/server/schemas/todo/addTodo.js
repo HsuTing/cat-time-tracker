@@ -1,8 +1,10 @@
 'use strict';
 
 import {mutationWithClientMutationId} from 'graphql-relay';
+import {inputCheck} from 'cat-components/lib/input-redux';
 import {addNonNull} from 'cat-graphql/lib/utils';
 
+import todo from 'fields/todo';
 import {
   todo as getTodo,
   setting as getSetting,
@@ -28,10 +30,16 @@ export default mutationWithClientMutationId({
       type: todoGroupType
     }
   },
-  mutateAndGetPayload: async ({tag, note}, {name}) => {
+  mutateAndGetPayload: async (args, {name}) => {
     const {tags} = await getSetting();
 
-    if(tags[tag] && await setTodo(name, {tag, note}))
+    const check = todo.map(({name, rules}, index) => {
+      return inputCheck(args[name], rules);
+    }).reduce((nowCheck, {isError}) => {
+      return nowCheck || isError;
+    }, false);
+
+    if(!check && tags[args.tag] && await setTodo(name, args))
       return {
         todo: [{
           id: 'custom',

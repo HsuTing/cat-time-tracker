@@ -2,6 +2,20 @@
 
 import * as firebase from 'firebase';
 
+export const setting = async ({
+  timerColor,
+  format,
+  tags
+}) => {
+  await firebase.database().ref('/setting/').set({
+    timerColor,
+    format,
+    tags
+  });
+
+  return true;
+};
+
 export const newTimeTracker = async (name, {
   id,
   tag,
