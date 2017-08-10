@@ -14,6 +14,7 @@ import pages from 'constants/pages';
 
 const ENV = process.env.NODE_ENV === 'production';
 const router = Router().loadMethods();
+const templateRoot = path.resolve(__dirname, './../../../views');
 
 let root = process.cwd();
 
@@ -25,9 +26,6 @@ do {
 } while(root !== '/')
 
 const {email} = require(path.resolve(root, '.time-tracker.json'));
-const data = {
-  email
-};
 
 const reducer = combineReducers(formReducer);
 
@@ -36,21 +34,28 @@ const renderPages = (parentPages, prefix = '/') => {
 
   parentPages.forEach(({pages, path}) => {
     if(!pages)
-      return childRouter.get(path, (ctx, next) => reactRender(
-        <Index data={data}
-          router={{
-            isServer: true,
-            location: ctx.request.url,
-            context: {}
-          }}
-          redux={{reducer}}
-        />, {
-          root: path.resolve(__dirname, './../../../views'),
-          js: 'index',
-          ENV,
-          data: JSON.stringify(data)
-        }
-      )(ctx, next));
+      return childRouter.get(path, (ctx, next) => {
+        const data = {
+          email,
+          name: ctx.name
+        };
+
+        return reactRender(
+          <Index data={data}
+            router={{
+              isServer: true,
+              location: ctx.request.url,
+              context: {}
+            }}
+            redux={{reducer}}
+          />, {
+            root: templateRoot,
+            js: 'index',
+            ENV,
+            data: JSON.stringify(data)
+          }
+        )(ctx, next);
+      });
 
     return renderPages(pages, path.slice(0, -1));
   });

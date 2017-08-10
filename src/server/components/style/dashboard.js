@@ -34,7 +34,7 @@ export const menu = {
 
   header: {
     display: 'grid',
-    gridTemplateRows: `auto ${menuImgHight} 32px`,
+    gridTemplateRows: `auto ${menuImgHight} 20px 20px`,
     height: '120px',
     padding: '16px',
     background: blueGrey._900_
@@ -52,8 +52,8 @@ export const menu = {
     height: '100%'
   },
 
-  email: {
-    margin: '5px 0px',
+  info: {
+    margin: 'auto 0px 0px',
     fontSize: '12px'
   },
 
