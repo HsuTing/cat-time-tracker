@@ -10,6 +10,7 @@ const all = {
 
 const a = {
   color: 'inherit',
+  fontWeight: 'bold',
   textDecoration: 'initial'
 };
 

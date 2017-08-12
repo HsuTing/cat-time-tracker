@@ -19,8 +19,9 @@ export default (env, func = () => {}) => {
   func(app);
 
   app.use(async (ctx, next) => {
-    const {name} = await getPkg();
+    const {name, homepage} = await getPkg();
     ctx.name = name;
+    ctx.homepage = homepage;
 
     return await next();
   });

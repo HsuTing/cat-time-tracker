@@ -37,6 +37,7 @@ const renderPages = (parentPages, prefix = '/') => {
       return childRouter.get(path, (ctx, next) => {
         const data = {
           email,
+          homepage: ctx.homepage,
           name: ctx.name
         };
 

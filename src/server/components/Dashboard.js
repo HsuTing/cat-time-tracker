@@ -29,6 +29,7 @@ class DashboardMenu extends React.Component {
   static propTypes = {
     email: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    homepage: PropTypes.string.isRequired,
     style: PropTypes.object,
     hide: PropTypes.func
   }
@@ -38,7 +39,7 @@ class DashboardMenu extends React.Component {
   }
 
   render() {
-    const {email, name, hide, ...props} = this.props;
+    const {email, name, homepage, hide, ...props} = this.props;
 
     return (
       <StyleRoot style={[style.menu.root, props.style]}>
@@ -47,15 +48,17 @@ class DashboardMenu extends React.Component {
 
           <div style={style.menu.imgBackground}>
             <Img style={[style.menu.imgBackground, style.menu.img]}
-              link='https://github.com/HsuTing/cat-time-tracker'
+              link={homepage}
               src='https://hsuting.github.io/public/img/icon.svg'
               type='div'
               target='_blank'
             />
           </div>
 
-          <p style={style.menu.info}
-          >{name}</p>
+          <a style={style.menu.info}
+            href={homepage}
+            target='_blank'
+          >{name}</a>
 
           <p style={style.menu.info}
           >{email}</p>
@@ -83,6 +86,7 @@ class Dashboard extends React.Component {
   static propTypes = {
     email: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    homepage: PropTypes.string.isRequired,
     sidebar: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
   }
@@ -94,12 +98,13 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const {email, name, sidebar} = this.props;
+    const {email, name, homepage, sidebar} = this.props;
 
     return (
       <StyleRoot style={style.root}>
         <DashboardMenu email={email}
           name={name}
+          homepage={homepage}
           style={style.menu.tabletRoot}
         />
 
@@ -136,11 +141,12 @@ class Dashboard extends React.Component {
 }
 
 
-export default ({email, name}) => ( // eslint-disable-line react/display-name, react/prop-types
+export default ({email, name, homepage}) => ( // eslint-disable-line react/display-name, react/prop-types
   <Sidebar menu={({hide}) => (
     <div>
       <DashboardMenu email={email}
         name={name}
+        homepage={homepage}
         hide={hide}
       />
     </div>
@@ -148,6 +154,7 @@ export default ({email, name}) => ( // eslint-disable-line react/display-name, r
   >
     <Dashboard email={email}
       name={name}
+      homepage={homepage}
     />
   </Sidebar>
 );
