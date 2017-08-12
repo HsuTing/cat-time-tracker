@@ -13,7 +13,7 @@
     "babel:watch": "rm -rf ./lib && babel -w src --out-dir lib",
     "prepublish": "yarn babel",
     "test-server": "export NODE_ENV=test && nodemon ./lib/index.js start",
-    "graphql": "babel src/server/schemas --out-dir lib/server/schemas && babel src/server/constants --out-dir lib/server/constants && build-graphql --schema ./lib/server/schemas/schema.js",
+    "graphql": "babel src --out-dir lib --ignore components,containers,mutations,public,routers && build-graphql --schema ./lib/server/schemas/schema.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "relay:watch": "relay-compiler --src ./src --schema ./schema.graphql --watch",
     "build": "yarn graphql && yarn relay && yarn babel",
