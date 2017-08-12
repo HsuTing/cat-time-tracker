@@ -23,6 +23,7 @@ import addTodo from './addTodo';
 import addDone from './addDone';
 import openServer from './openServer';
 import addTimeTracker from './addTimeTracker';
+import countTime from './countTime';
 
 const keys = [
   'apiKey',
@@ -87,6 +88,14 @@ do {
         const todo = await getTodo(pkg);
 
         await addDone(pkg, todo);
+        break;
+      }
+
+      case 'count': {
+        const pkg = await getPkg();
+        const setting = await getSetting();
+
+        await countTime(pkg, setting);
         break;
       }
 

@@ -24,7 +24,7 @@
     "time-tracker": "./lib/index.js"
   },
   "name": "cat-time-tracker",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Time tracker",
   "author": {
     "name": "HsuTing",

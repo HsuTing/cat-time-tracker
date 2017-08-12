@@ -21,6 +21,9 @@ time-tracker todo
 // done todo
 time-tracker done
 
+// count time
+time-tracker count
+
 // open a server
 time-tracker start
 ```
