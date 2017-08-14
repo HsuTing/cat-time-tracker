@@ -10,7 +10,7 @@ import {
 export default async ({name}, {timerColor, tags}) => {
   const output = (await getTime({name}))
     .reduce((total, {tag, start, end}) => {
-      total[tag] = total[tag] || 0 + (
+      total[tag] = (total[tag] || 0) + (
         moment(end).format('x') - moment(start).format('x')
       );
 
