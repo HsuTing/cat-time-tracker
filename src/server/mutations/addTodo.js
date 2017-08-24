@@ -28,12 +28,12 @@ const mutation = graphql`
   }
 `;
 
-export default (input) => {
+export default input => {
   const configs = [{
     type: 'RANGE_ADD',
     parentID: 'todo',
     connectionInfo: [{
-      rangeBehavior: 'append',
+      rangeBehavior: 'append'
     }],
     edgeName: 'edges',
   }];

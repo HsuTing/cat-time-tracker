@@ -43,6 +43,7 @@ export default class ModifyTodo extends React.Component {
           >
             <Toggle type='switch'
               onClick={() => this.toggleTodo(id)}
+              clicked={status === 'done'}
               checked={status === 'done'}
             />
 
