@@ -6,6 +6,8 @@ yarn.lock
 .travis.yml
 .yo-rc.json
 test
+.nycrc
 coverage
+.nycrc_output
 .time-tracker.json
 schema.graphql

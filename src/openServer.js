@@ -15,5 +15,5 @@ export default port => {
   });
 
   console.log(chalk.cyan(`open server at port ${port || 9000}.`));
-  app.listen(port || 9000);
+  return app.listen(port || 9000);
 };

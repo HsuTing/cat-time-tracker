@@ -5,6 +5,7 @@
     "npm": "5.3.0"
   },
   "scripts": {
+    "test": "nyc mocha ./src/test/*.js --recursive --reporter spec --timeout 50000",
     "webpack-server": "webpack-dev-server --content-base src --hot --inline",
     "webpack": "cross-env NODE_ENV=production webpack",
     "lint": "eslint --cache ./src ./bin --ext .js",
@@ -66,10 +67,13 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-watch": "^3.1.2",
+    "mocha": "^3.5.0",
     "nodemon": "^1.11.0",
+    "nyc": "^11.1.0",
     "pre-commit": "^1.2.2",
     "redux-logger": "^3.0.6",
     "relay-compiler": "^1.1.0",
+    "should": "^11.2.1",
     "webpack": "^3.4.0",
     "webpack-dev-server": "^2.6.1"
   },
