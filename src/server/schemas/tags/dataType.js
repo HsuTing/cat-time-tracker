@@ -1,6 +1,7 @@
 'use strict';
 
 import {
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString
 } from 'graphql';
@@ -22,11 +23,11 @@ export const dataFields = {
   description: 'This is the type of the Tags.',
   fields: {
     name: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the name of the Tags.'
     },
     color: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the color of the Tags.',
       resolve: ({color}) => ansiHTML(chalk[color]('color')).split(/:|;/)[1]
     }

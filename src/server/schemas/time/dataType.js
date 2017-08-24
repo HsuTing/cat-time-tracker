@@ -1,6 +1,7 @@
 'use strict';
 
 import {
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
   GraphQLList
@@ -22,23 +23,23 @@ export const dataFields = {
   description: 'This is the type of the Time.',
   fields: {
     todo_id: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the todo id of the Time.'
     },
     tag: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the tag of the Time.'
     },
     note: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the note of the Time.'
     },
     start: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the start time of the Time.'
     },
     end: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the end time of the Time.'
     }
   }

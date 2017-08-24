@@ -2,7 +2,6 @@
 
 import {mutationWithClientMutationId} from 'graphql-relay';
 import {inputCheck} from 'cat-components/lib/input-redux';
-import {addNonNull} from 'cat-graphql/lib/utils';
 
 import todo from 'fields/todo';
 import {
@@ -20,10 +19,10 @@ const {tag, note} = dataFields.fields;
 export default mutationWithClientMutationId({
   name: 'AddTodo',
   description: 'Add the Todo.',
-  inputFields: addNonNull({
+  inputFields: {
     tag,
     note
-  }),
+  },
   outputFields: {
     todo: {
       description: 'New todo',

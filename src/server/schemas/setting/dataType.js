@@ -1,6 +1,7 @@
 'use strict';
 
 import {
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString
 } from 'graphql';
@@ -16,15 +17,15 @@ export const dataFields = {
   description: 'This is the type of the Setting.',
   fields: {
     format: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the format in the Setting.'
     },
     tags: {
-      type: tagsGroupType,
+      type: new GraphQLNonNull(tagsGroupType),
       description: 'This is the tags in the Setting.'
     },
     timerColor: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'This is the time color in the Setting.'
     }
   }

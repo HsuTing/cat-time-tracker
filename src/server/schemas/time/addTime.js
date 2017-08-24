@@ -8,7 +8,6 @@ import {
   fromGlobalId
 } from 'graphql-relay';
 import {inputCheck} from 'cat-components/lib/input-redux';
-import {addNonNull} from 'cat-graphql/lib/utils';
 
 import timeTracker from 'fields/timeTracker';
 import {newTimeTracker} from 'db/set';
@@ -21,12 +20,12 @@ const {todo_id, ...fields} = dataFields.fields;
 export default mutationWithClientMutationId({
   name: 'AddTime',
   description: 'Add the data of the Time.',
-  inputFields: addNonNull({
+  inputFields: {
     ...fields,
     id: {
       ...todo_id
     }
-  }),
+  },
   outputFields: {
     status: {
       description: 'Use to check if adding the Time successes.',
