@@ -19,5 +19,4 @@ script:
 branches:
 only:
   - master
-cache:
 yarn: true
