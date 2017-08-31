@@ -5,9 +5,8 @@ yarn.lock
 .eslint*
 .travis.yml
 .yo-rc.json
-test
-.nycrc
+__tests__
+jest.config.js
 coverage
-.nycrc_output
 .time-tracker.json
 schema.graphql

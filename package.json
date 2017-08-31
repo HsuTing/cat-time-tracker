@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "nyc mocha ./src/test/*.js --recursive --reporter spec --timeout 50000",
+    "test": "jest --silent",
+    "test:watch": "yarn test -- --watchAll",
     "webpack-server": "webpack-dev-server --content-base src --hot --inline",
     "webpack": "cross-env NODE_ENV=production webpack",
     "lint": "eslint --cache ./src --ext .js",
@@ -9,7 +10,7 @@
     "babel:watch": "rm -rf ./lib && babel -w src --out-dir lib",
     "prepublish": "yarn babel",
     "test-server": "cross-env NODE_ENV=test nodemon ./lib/index.js start",
-    "graphql": "babel src --out-dir lib --ignore components,containers,mutations,public,routers && build-graphql --schema ./lib/server/schemas/schema.js",
+    "graphql": "babel src --out-dir lib --ignore __tests__,components,containers,mutations,public,routers && build-graphql --schema ./lib/server/schemas/schema.js",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "relay:watch": "relay-compiler --src ./src --schema ./schema.graphql --watch",
     "build": "yarn graphql && yarn relay && yarn babel",
@@ -62,13 +63,11 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.1.0",
     "eslint-watch": "^3.1.2",
-    "mocha": "^3.5.0",
+    "jest": "^20.0.4",
     "nodemon": "^1.11.0",
-    "nyc": "^11.1.0",
     "pre-commit": "^1.2.2",
     "redux-logger": "^3.0.6",
     "relay-compiler": "^1.1.0",
-    "should": "^11.2.1",
     "webpack": "^3.4.0",
     "webpack-dev-server": "^2.6.1"
   },
