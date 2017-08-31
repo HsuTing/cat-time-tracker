@@ -14,10 +14,12 @@ before_install:
   - make
   - sudo make install
   - cd ./../
+  - ./test.sh
 script:
   - yarn lint
   - yarn build
   - yarn prod
+  - yarn test
 branches:
 only:
   - master

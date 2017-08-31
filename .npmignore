@@ -5,8 +5,10 @@ yarn.lock
 .eslint*
 .travis.yml
 .yo-rc.json
-__tests__
+lib/__tests__
 jest.config.js
 coverage
 .time-tracker.json
 schema.graphql
+test.sh
+webpack.config.js
