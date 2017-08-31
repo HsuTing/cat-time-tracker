@@ -15,7 +15,7 @@ import getPkg from './../getPkg';
 const app = new Koa();
 const root = path.resolve(__dirname, './../../');
 
-export default (env, func = () => {}) => {
+export default (env, /* istanbul ignore next */ func = () => {}) => {
   func(app);
 
   app.use(async (ctx, next) => {
@@ -41,7 +41,7 @@ export default (env, func = () => {}) => {
     .forEach(router => {
       const routerPath = `./routers/${router.replace('.js', '')}`;
       app.use(
-        (require(routerPath).default || require(routerPath)).middleware()
+        (require(routerPath).default || /* istanbul ignore next */ require(routerPath)).middleware()
       );
     });
 

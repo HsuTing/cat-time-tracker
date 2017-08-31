@@ -7,6 +7,9 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.js',
+    '!src/*.js',
+    '!src/firebase/*.js',
+    '!**/__generated__/**',
     '!**/node_modules/**',
     '!src/bin/*.js'
   ],
